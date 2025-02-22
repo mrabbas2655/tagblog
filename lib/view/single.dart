@@ -9,6 +9,8 @@ import '../component/my_colors.dart';
 import '../component/my_component.dart';
 import '../controller/Single_article_controller.dart';
 import '../controller/home_screen_controller.dart';
+import '../controller/list_article_controller.dart';
+import 'articel_list_screen.dart';
 
 class Single extends StatefulWidget {
   Single(
@@ -35,9 +37,9 @@ class _SingleState extends State<Single> {
   @override
   void initState() {
     super.initState();
-    homeScreenController.tagsList;
+    widget.homeScreenController.tagsList;
     singleArticleController.getArticleInfo();
-    // تنظیم WebViewController
+
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
@@ -49,9 +51,7 @@ class _SingleState extends State<Single> {
             return NavigationDecision.navigate;
           },
         ),
-      )
-      ..loadHtmlString(
-          singleArticleController.articleInfoModels.value.content!);
+      );
   }
 
   @override
@@ -73,9 +73,8 @@ class _SingleState extends State<Single> {
                         children: [
                           CachedNetworkImage(
                             imageUrl: singleArticleController
-                                .articleInfoModels.value.image!,
-                            imageBuilder: (context, imageProvider) =>
-                                Image(image: imageProvider),
+                                    .articleInfoModels.value.image ??
+                                '',
                             placeholder: (context, url) =>
                                 SpinKitPouringHourGlass(
                               color: SolidColors.primaryColor,
@@ -102,7 +101,6 @@ class _SingleState extends State<Single> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  SizedBox(width: 20),
                                   Icon(Icons.arrow_back,
                                       color: Colors.white, size: 24),
                                   Expanded(child: SizedBox()),
@@ -122,7 +120,8 @@ class _SingleState extends State<Single> {
                         padding: const EdgeInsets.fromLTRB(8.0, 8.0, 16.0, 8.0),
                         child: Text(
                           singleArticleController
-                              .articleInfoModels.value.title!,
+                                  .articleInfoModels.value.title ??
+                              'بدون عنوان',
                           style: textTheme.titleLarge,
                           maxLines: 2,
                           textAlign: TextAlign.right,
@@ -141,24 +140,58 @@ class _SingleState extends State<Single> {
                             SizedBox(width: 12),
                             Text(
                               singleArticleController
-                                  .articleInfoModels.value.author!,
+                                      .articleInfoModels.value.author ??
+                                  'ناشناس',
                               style: textTheme.headlineMedium,
                             ),
                             SizedBox(width: 12),
                             Text(
                               singleArticleController
-                                  .articleInfoModels.value.createdAt!,
+                                      .articleInfoModels.value.createdAt ??
+                                  'نامشخص',
                               style: textTheme.headlineSmall,
                             ),
                           ],
                         ),
                       ),
-                      // جایگزینی HtmlWidget با WebViewWidget
-
-                      Expanded(
-                        child: WebViewWidget(controller: _controller),
+                      // بررسی null قبل از لود وب‌ویو
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                        child: SizedBox(
+                          height: 300,
+                          child: singleArticleController
+                                      .articleInfoModels.value.content !=
+                                  null
+                              ? WebViewWidget(
+                                  controller: _controller
+                                    ..loadHtmlString(
+                                      """
+              <html>
+              <head>
+                <style>
+                  body {
+                    font-size: 30px; /* سایز متن */
+                    direction: rtl; /* راست به چپ */
+                    text-align: right;
+                    font-family: Arial, sans-serif; /* انتخاب فونت */
+                    padding: 16px;
+                    margin: 0;
+                  }
+                </style>
+              </head>
+              <body>
+                ${singleArticleController.articleInfoModels.value.content ?? "<p>محتوا در دسترس نیست</p>"}
+                                      </body>
+                                      </html>
+                                      """,
+                                    ),
+                                )
+                              : Center(child: CircularProgressIndicator()),
+                        ),
                       ),
-                      tags(),
+
+                      Tags(),
+                      SizedBox(height: 8),
                       topVisited()
                     ],
                   ),
@@ -168,42 +201,57 @@ class _SingleState extends State<Single> {
     );
   }
 
-  Widget tags() {
-    return Obx(
-      () => homeScreenController.tagsList.isEmpty
-          ? Center(child: Text('هیچ تگی برای نمایش وجود ندارد'))
-          : SizedBox(
-              height: 60,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: homeScreenController.tagsList.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        0, 8, index == 0 ? widget.bodyMargin : 15, 8),
-                    child: MainTags(
-                      textTheme: widget.textTheme,
-                      index: index,
-                      text: homeScreenController.tagsList[index].title,
+  Widget Tags() {
+    return SizedBox(
+      height: 45,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: singleArticleController.tagsList.length,
+          itemBuilder: ((context, index) {
+            return Padding(
+              padding:
+                  EdgeInsets.only(right: index == 0 ? widget.bodyMargin : 12),
+              child: GestureDetector(
+                  onTap: () async {
+                    var tagId = singleArticleController.tagsList[index].id!;
+
+                    await Get.find<ListArticleController>()
+                        .getArticleListWithTagsId(tagId);
+
+                    // String tagName = singleArticleController.tagsList[index].title!;
+                    Get.to(ArticleListScreen());
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 14),
+                    child: Container(
+                      height: 80,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(24)),
+                          color: Colors.grey),
+                      child: Padding(
+                          padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                          child: Text(
+                            singleArticleController.tagsList[index].title!,
+                            style: TextTheme.of(context).bodyMedium,
+                          )),
                     ),
-                  );
-                },
-              ),
-            ),
+                  )),
+            );
+          })),
     );
   }
 
   Widget topVisited() {
     return Obx(
-      () => homeScreenController.topVisitedList.isEmpty
+      () => singleArticleController.releatedList.isEmpty
           ? Center(child: Text('هیچ مورد بازدید شده‌ای وجود ندارد'))
           : SizedBox(
-              height: widget.size.height / 3,
+              height: widget.size.height / 2.5,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: homeScreenController.topVisitedList.length,
+                itemCount: singleArticleController.releatedList.length,
                 itemBuilder: (context, index) {
-                  final item = homeScreenController.topVisitedList[index];
+                  final item = singleArticleController.releatedList[index];
                   return Padding(
                     padding: EdgeInsets.only(
                         right: index == 0 ? widget.bodyMargin : 15),
@@ -225,22 +273,22 @@ class _SingleState extends State<Single> {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Text(
-                          item.title ?? 'بدون عنوان',
-                          style: widget.textTheme.headlineMedium,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                        SizedBox(
+                          width: widget.size.width / 2.1,
+                          child: Text(
+                            item.title ?? 'بدون عنوان',
+                            style: widget.textTheme.headlineMedium,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            softWrap: true,
+                          ),
                         ),
                         SizedBox(height: 4),
-                        Text(
-                          'نویسنده: ${item.author ?? 'ناشناس'}',
-                          style: widget.textTheme.displayMedium,
-                        ),
                         Row(
                           children: [
                             Icon(Icons.remove_red_eye, size: 16),
                             SizedBox(width: 4),
-                            Text('${item.view ?? 0} بازدید',
+                            Text('${item.id ?? 0} بازدید',
                                 style: widget.textTheme.displaySmall),
                           ],
                         ),
@@ -253,3 +301,170 @@ class _SingleState extends State<Single> {
     );
   }
 }
+
+// class Tags extends StatelessWidget {
+//   const Tags({
+//     Key? key,
+//     required this.singleArticleController,
+//   }) : super(key: key);
+//
+//   final SingleArticleController singleArticleController;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     TextTheme textheme = TextTheme.of(context);
+//     return SizedBox(
+//       height: 43,
+//       child: ListView.builder(
+//           scrollDirection: Axis.horizontal,
+//           itemCount: singleArticleController.tagsList.length,
+//           itemBuilder: ((context, index) {
+//             return Padding(
+//               padding: const EdgeInsets.all(8.0),
+//               child: GestureDetector(
+//                 onTap: () async {
+//                   var tagId = singleArticleController.tagsList[index].id!;
+//
+//                   await Get.find<ListArticleController>()
+//                       .getArticleListWithTagsId(tagId);
+//
+//                   String tagName = singleArticleController.tagsList[index].title!;
+//                   Get.to(ArticleListScreen());
+//                 },
+//                 child: Padding(
+//                   padding: EdgeInsets.only(left: 16),
+//                   child: Container(
+//                     height: 60,
+//                     decoration: const BoxDecoration(
+//                         borderRadius: BorderRadius.all(Radius.circular(24)),
+//                         color: Colors.grey),
+//                     child: Padding(
+//                         padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+//                         child: Text(
+//                           singleArticleController.tagsList[index].title!,
+//                           style: textheme.displayMedium,
+//                         )),
+//                   ),
+//                 ),
+//               ),
+//             );
+//           })),
+//     );
+//   }
+// }
+
+// class Similar extends StatelessWidget {
+//   const Similar({
+//     Key? key,
+//     required this.singleArticleController,
+//     required this.textheme,
+//   }) : super(key: key);
+//
+//   final SingleArticleController singleArticleController;
+//   final TextTheme textheme;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: Get.height / 3.5,
+//       child: ListView.builder(
+//           itemCount: singleArticleController.relatedList.length,
+//           scrollDirection: Axis.horizontal,
+//           itemBuilder: ((context, index) {
+//             //blog item
+//             return GestureDetector(
+//               onTap: (() {
+//                 singleArticleController.getArticleInfo(
+//                     singleArticleController.relatedList[index].id);
+//               }),
+//               child: Padding(
+//                 padding:
+//                 EdgeInsets.only(right: index == 0 ? Get.width / 15 : 15),
+//                 child: Column(
+//                   children: [
+//                     Padding(
+//                       padding: EdgeInsets.all(Dimens.small),
+//                       child: SizedBox(
+//                         height: Get.height / 5.3,
+//                         width: Get.width / 2.4,
+//                         child: Stack(
+//                           children: [
+//                             CachedNetworkImage(
+//                               imageUrl: singleArticleController
+//                                   .relatedList[index].image!,
+//                               imageBuilder: ((context, imageProvider) =>
+//                                   Container(
+//                                     decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.all(
+//                                           Radius.circular(Dimens.medium)),
+//                                       image: DecorationImage(
+//                                           image: imageProvider,
+//                                           fit: BoxFit.cover),
+//                                     ),
+//                                     foregroundDecoration: const BoxDecoration(
+//                                         borderRadius: BorderRadius.all(
+//                                             Radius.circular(16)),
+//                                         gradient: LinearGradient(
+//                                             begin: Alignment.bottomCenter,
+//                                             end: Alignment.topCenter,
+//                                             colors: GradientColors.blogPost)),
+//                                   )),
+//                               placeholder: ((context, url) => const Loading()),
+//                               errorWidget: ((context, url, error) => Icon(
+//                                 Icons.image_not_supported_outlined,
+//                                 size: Dimens.xlarge - 14,
+//                                 color: SolidColors.greyColor,
+//                               )),
+//                             ),
+//                             Positioned(
+//                               bottom: 8,
+//                               left: 0,
+//                               right: 0,
+//                               child: Row(
+//                                 mainAxisAlignment:
+//                                 MainAxisAlignment.spaceAround,
+//                                 children: [
+//                                   Text(
+//                                     singleArticleController
+//                                         .relatedList[index].author!,
+//                                     style: textheme.subtitle1,
+//                                   ),
+//                                   Row(
+//                                     children: [
+//                                       Text(
+//                                         singleArticleController
+//                                             .relatedList[index].view!,
+//                                         style: textheme.subtitle1,
+//                                       ),
+//                                       SizedBox(
+//                                         width: Dimens.small,
+//                                       ),
+//                                       Icon(
+//                                         Icons.remove_red_eye_sharp,
+//                                         color: SolidColors.lightIcon,
+//                                         size: Dimens.medium,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ],
+//                               ),
+//                             )
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                     SizedBox(
+//                         width: Get.width / 2.4,
+//                         child: Text(
+//                           singleArticleController.relatedList[index].title!,
+//                           overflow: TextOverflow.ellipsis,
+//                           maxLines: 2,
+//                         ))
+//                   ],
+//                 ),
+//               ),
+//             );
+//           })),
+//     );
+//   }
+// }
