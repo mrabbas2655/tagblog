@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/controller/Single_article_controller.dart';
+import 'package:tecbloc/controller/single_article_controller.dart';
 import 'package:tecbloc/controller/home_screen_controller.dart';
 import 'package:tecbloc/view/articel_list_screen.dart';
 
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             SizedBox(height: 68),
                           ],
                         )
-                      : loading(),
+                      : Loading(),
                 )),
           ),
         ),
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            placeholder: (context, url) => loading(),
+            placeholder: (context, url) => Loading(),
             errorWidget: (context, url, error) {
               // چاپ خطا برای بررسی
               return Icon(Icons.image_not_supported,
@@ -311,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      placeholder: (context, url) => loading(),
+                      placeholder: (context, url) => Loading(),
                       errorWidget: (context, url, error) {
                         // چاپ خطا برای دیباگ
                         return Icon(

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/controller/Single_article_controller.dart';
+import 'package:tecbloc/controller/single_article_controller.dart';
 import 'package:tecbloc/controller/list_article_controller.dart';
 
 import '../component/my_component.dart';
@@ -23,9 +23,6 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -79,7 +76,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                               ),
                             );
                           },
-                          placeholder: (context, url) => loading(),
+                          placeholder: (context, url) => Loading(),
                           errorWidget: (context, url, error) => Container(
                             height: Get.height / 6,
                             width: Get.width / 3,
@@ -163,7 +160,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 //
-// import '../controller/Single_article_controller.dart';
+// import '../controller/single_article_controller.dart';
 // import '../controller/list_article_controller.dart';
 //
 // // ignore: must_be_immutable

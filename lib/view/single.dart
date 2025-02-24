@@ -7,7 +7,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../component/my_colors.dart';
 import '../component/my_component.dart';
-import '../controller/Single_article_controller.dart';
+import '../controller/single_article_controller.dart';
 import '../controller/home_screen_controller.dart';
 import '../controller/list_article_controller.dart';
 import 'articel_list_screen.dart';
@@ -61,7 +61,7 @@ class _SingleState extends State<Single> {
           physics: BouncingScrollPhysics(),
           child: Obx(
             () => singleArticleController.articleInfoModels.value.title == null
-                ? SizedBox(height: Get.height, child: loading())
+                ? SizedBox(height: Get.height, child: Loading())
                 : Column(
                     children: [
                       Stack(
