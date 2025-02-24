@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/controller/Single_article_controller.dart';
 import 'package:tecbloc/controller/list_article_controller.dart';
-import 'package:tecbloc/view/single.dart';
 
 import '../component/my_component.dart';
 
@@ -54,13 +53,8 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                   onTap: () {
                     singleArticleController.id.value =
                         int.parse(article.id.toString());
-                    Get.to(
-                      Single(
-                          size: size,
-                          textTheme: textTheme,
-                          bodyMargin: bodyMargin),
-                      // arguments: [article.id],
-                    );
+                    singleArticleController.getArticleInfo(
+                        listArticleController.articleList[index].id);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

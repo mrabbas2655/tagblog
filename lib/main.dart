@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/view/articel_list_screen.dart';
+import 'package:tecbloc/view/main_screen/main_screen.dart';
 
 import 'component/my_colors.dart';
 
@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // home: Single(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-      home: ArticleListScreen(),
+      home: MainScreen(),
       locale: Locale('fa', ''),
       supportedLocales: const [
         Locale('fa', ''),

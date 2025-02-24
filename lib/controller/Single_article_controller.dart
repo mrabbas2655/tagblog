@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tecbloc/view/single.dart';
 
 import '../Services/dio_service.dart';
 import '../component/api_constant.dart';
@@ -13,7 +14,7 @@ class SingleArticleController extends GetxController {
   Rx<ArticleInfoModels> articleInfoModels = ArticleInfoModels().obs;
   RxList<TagsModel> tagsList = RxList();
   RxList<ArticleModel> releatedList = RxList();
-  getArticleInfo() async {
+  getArticleInfo(var id) async {
     articleInfoModels = ArticleInfoModels().obs;
     loading.value = true; // شروع لودینگ
     var userId = "";
@@ -32,5 +33,6 @@ class SingleArticleController extends GetxController {
     response.data["related"].forEach((element) {
       releatedList.add(ArticleModel.fromJson(element));
     });
+    Get.to(Single());
   }
 }

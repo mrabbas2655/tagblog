@@ -13,15 +13,10 @@ import '../controller/list_article_controller.dart';
 import 'articel_list_screen.dart';
 
 class Single extends StatefulWidget {
-  Single(
-      {super.key,
-      required this.size,
-      required this.textTheme,
-      required this.bodyMargin});
+  Single({
+    super.key,
+  });
   final homeScreenController = Get.put(HomeScreenController());
-  final Size size;
-  final TextTheme textTheme;
-  final double bodyMargin;
 
   @override
   State<Single> createState() => _SingleState();
@@ -31,6 +26,9 @@ class _SingleState extends State<Single> {
   late final WebViewController _controller;
   SingleArticleController singleArticleController =
       Get.put(SingleArticleController());
+  ListArticleController listArticleController =
+      Get.put(ListArticleController());
+
   var textTheme;
   late double bodyMargin;
 
@@ -38,15 +36,12 @@ class _SingleState extends State<Single> {
   void initState() {
     super.initState();
     widget.homeScreenController.tagsList;
-    singleArticleController.getArticleInfo();
 
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onPageFinished: (url) {
-            print('Page loaded: $url');
-          },
+          onPageFinished: (url) {},
           onNavigationRequest: (request) {
             return NavigationDecision.navigate;
           },
@@ -166,30 +161,32 @@ class _SingleState extends State<Single> {
                                   controller: _controller
                                     ..loadHtmlString(
                                       """
-              <html>
-              <head>
-                <style>
-                  body {
-                    font-size: 30px; /* سایز متن */
-                    direction: rtl; /* راست به چپ */
-                    text-align: right;
-                    font-family: Arial, sans-serif; /* انتخاب فونت */
-                    padding: 16px;
-                    margin: 0;
-                  }
-                </style>
-              </head>
-              <body>
-                ${singleArticleController.articleInfoModels.value.content ?? "<p>محتوا در دسترس نیست</p>"}
-                                      </body>
-                                      </html>
-                                      """,
+                <html>
+                <head>
+                  <style>
+                    body {
+                      font-size: 36px; /* سایز بزرگ‌تر متن */
+                      font-weight: bold; /* متن بولد */
+                      direction: rtl; /* راست به چپ */
+                      text-align: right;
+                      font-family: Arial, sans-serif;
+                      padding: 16px;
+                      margin: 0;
+                    }
+                  </style>
+                </head>
+                <body>
+                  ${singleArticleController.articleInfoModels.value.content ?? "<p>محتوا در دسترس نیست</p>"}
+                </body>
+                </html>
+                """,
                                     ),
                                 )
-                              : Center(child: CircularProgressIndicator()),
+                              : const Center(
+                                  child: CircularProgressIndicator()),
                         ),
                       ),
-
+                      SizedBox(height: 6),
                       Tags(),
                       SizedBox(height: 8),
                       topVisited()
@@ -209,8 +206,7 @@ class _SingleState extends State<Single> {
           itemCount: singleArticleController.tagsList.length,
           itemBuilder: ((context, index) {
             return Padding(
-              padding:
-                  EdgeInsets.only(right: index == 0 ? widget.bodyMargin : 12),
+              padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 12),
               child: GestureDetector(
                   onTap: () async {
                     var tagId = singleArticleController.tagsList[index].id!;
@@ -242,57 +238,68 @@ class _SingleState extends State<Single> {
   }
 
   Widget topVisited() {
+    textTheme = Theme.of(context).textTheme;
+    var size = MediaQuery.of(context).size;
+    bodyMargin = size.width / 10;
+
     return Obx(
       () => singleArticleController.releatedList.isEmpty
           ? Center(child: Text('هیچ مورد بازدید شده‌ای وجود ندارد'))
           : SizedBox(
-              height: widget.size.height / 2.5,
+              height: size.height / 2.5,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: singleArticleController.releatedList.length,
                 itemBuilder: (context, index) {
                   final item = singleArticleController.releatedList[index];
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        right: index == 0 ? widget.bodyMargin : 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: widget.size.height / 4.1,
-                          width: widget.size.width / 2.1,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                            image: item.image != null
-                                ? DecorationImage(
-                                    image: NetworkImage(item.image!),
-                                    fit: BoxFit.cover,
-                                  )
-                                : null,
-                            color: Colors.grey[300], // رنگ پیش‌فرض برای خطا
+                  return GestureDetector(
+                    onTap: () {
+                      singleArticleController.getArticleInfo(
+                          singleArticleController.releatedList[index].id);
+                    },
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: size.height / 4.1,
+                            width: size.width / 2.1,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                              image: item.image != null
+                                  ? DecorationImage(
+                                      image: NetworkImage(item.image!),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : null,
+                              color: Colors.grey[300], // رنگ پیش‌فرض برای خطا
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                        SizedBox(
-                          width: widget.size.width / 2.1,
-                          child: Text(
-                            item.title ?? 'بدون عنوان',
-                            style: widget.textTheme.headlineMedium,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            softWrap: true,
+                          SizedBox(height: 8),
+                          SizedBox(
+                            width: size.width / 2.1,
+                            child: Text(
+                              item.title ?? 'بدون عنوان',
+                              style: textTheme.headlineMedium,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              softWrap: true,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Icon(Icons.remove_red_eye, size: 16),
-                            SizedBox(width: 4),
-                            Text('${item.id ?? 0} بازدید',
-                                style: widget.textTheme.displaySmall),
-                          ],
-                        ),
-                      ],
+                          SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(Icons.remove_red_eye, size: 16),
+                              SizedBox(width: 4),
+                              Text('${item.id ?? 0} بازدید',
+                                  style: textTheme.displaySmall),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
