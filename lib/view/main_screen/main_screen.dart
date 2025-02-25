@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tecbloc/controller/register_controller.dart';
 import 'package:tecbloc/view/main_screen/profile_screen.dart';
 // پکیج share را وارد کنید
 import 'package:tecbloc/view/register/register_intro.dart';
@@ -160,8 +161,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
+class BottomNavigation extends StatefulWidget {
+  BottomNavigation({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -171,6 +172,15 @@ class BottomNavigation extends StatelessWidget {
   final Size size;
   final double bodyMargin;
   final Function(int) changeScreen;
+
+  @override
+  State<BottomNavigation> createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  RegisterController _registerController =
+      Get.put(RegisterController(), permanent: false);
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -178,7 +188,7 @@ class BottomNavigation extends StatelessWidget {
       left: 0,
       right: 0,
       child: Container(
-        height: size.height / 13,
+        height: widget.size.height / 13,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: GradientColors.bottomNavBackground,
@@ -186,9 +196,10 @@ class BottomNavigation extends StatelessWidget {
               end: Alignment.bottomCenter),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+          padding: EdgeInsets.only(
+              left: widget.bodyMargin, right: widget.bodyMargin),
           child: Container(
-            height: size.height / 3,
+            height: widget.size.height / 3,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 gradient: LinearGradient(
@@ -198,7 +209,7 @@ class BottomNavigation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
-                  onPressed: () => changeScreen(0),
+                  onPressed: () => widget.changeScreen(0),
                   icon: ImageIcon(
                     AssetImage(Assets.icons.home.path),
                     color: Colors.white,
@@ -207,7 +218,7 @@ class BottomNavigation extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     // TODO
-                    Get.to(RegisterIntro());
+                    _registerController.toggleLogin();
                     // changeScreen(2);
                   },
                   icon: ImageIcon(
@@ -216,7 +227,7 @@ class BottomNavigation extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () => changeScreen(1),
+                  onPressed: () => widget.changeScreen(1),
                   icon: ImageIcon(
                     AssetImage(Assets.icons.user.path),
                     color: Colors.white,

@@ -5,6 +5,7 @@ import 'package:tecbloc/Services/dio_service.dart';
 import 'package:tecbloc/component/api_constant.dart';
 import 'package:tecbloc/component/storage_const.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
+import 'package:tecbloc/view/register/register_intro.dart';
 
 class RegisterController extends GetxController {
   TextEditingController editingTextEditingController = TextEditingController();
@@ -39,15 +40,30 @@ class RegisterController extends GetxController {
     var response =
         await DioService().postMethod(map, ApiUrlConstant.postRegister);
     print("Verification response: ${response.data}");
-    if (response.data['response'] == 'verified') {
-      var box = GetStorage();
-      box.write(token, response.data['token']);
-      box.write(userId, response.data['user_id']);
-      print("Token: ${box.read(token)}");
-      print("User ID: ${box.read(userId)}");
-      Get.offAll(() => MainScreen());
+    var status = response.data['response'];
+    switch (status) {
+      case 'verified':
+        var box = GetStorage();
+        box.write(token, response.data['token']);
+        box.write(userId, response.data['user_id']);
+        print("Token: ${box.read(token)}");
+        print("User ID: ${box.read(userId)}");
+        Get.offAll(() => MainScreen());
+        break;
+      case "incorrect_code ":
+        Get.snackbar("error", "no code register");
+        break;
+      case "expired":
+        Get.snackbar("error", "no code register time");
+        break;
+    }
+  }
+
+  toggleLogin() {
+    if (GetStorage().read(token) == null) {
+      Get.to(RegisterIntro());
     } else {
-      print("Verification failed: ${response.data}");
+      debugPrint('no tt');
     }
   }
 }
