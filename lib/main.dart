@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
 
 import 'component/my_colors.dart';
@@ -20,7 +21,7 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() {
+void main() async {
   // استفاده از MyHttpOverrides برای غیرفعال کردن تأیید گواهی SSL
   HttpOverrides.global = MyHttpOverrides();
 
@@ -29,7 +30,7 @@ void main() {
       statusBarColor: SolidColors.statusBarColor,
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: SolidColors.systemNavigationBarColor));
-
+  await GetStorage.init();
   // اجرای اپلیکیشن
   runApp(const MyApp());
 }

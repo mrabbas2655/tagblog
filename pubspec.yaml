@@ -26,7 +26,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-#  flutter_widget_from_html: ^0.16.0
+  #  flutter_widget_from_html: ^0.16.0
   cupertino_icons: ^1.0.8
   webview_flutter: ^4.10.0
   url_launcher: ^6.3.1
@@ -39,6 +39,7 @@ dependencies:
   flutter_localization: ^0.3.0
   flutter_svg: ^2.0.16
   http: ^1.2.2
+  get_storage: ^2.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

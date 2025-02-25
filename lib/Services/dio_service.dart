@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart' as dio_service;
 import 'package:dio/dio.dart';
 
 class DioService {
+  Dio dio = Dio();
   Future<dynamic> getMethod(String url) async {
-    Dio dio = Dio();
     dio.options.headers['content-type'] = 'application/json';
 
     try {
@@ -16,5 +17,22 @@ class DioService {
       log("Error occurred: $e"); // در صورت خطا چاپ ارور
       return null; // یا یک پاسخ خطای سفارشی
     }
+  }
+
+  Future<dynamic> postMethod(Map<String, dynamic> map, String url) async {
+    dio.options.headers['content-type'] = 'application/json';
+    //   TODO
+    return await dio
+        .post(url,
+            data: dio_service.FormData.fromMap(map),
+            options: Options(responseType: ResponseType.json, method: "POST"))
+        .then(
+      (value) {
+        log(value.headers.toString());
+        log(value.data.toString());
+        log(value.statusCode.toString());
+        return value;
+      },
+    );
   }
 }

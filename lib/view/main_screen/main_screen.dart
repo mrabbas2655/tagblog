@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/view/main_screen/profile_screen.dart';
 // پکیج share را وارد کنید
-import 'package:tecbloc/view/register_intro.dart';
+import 'package:tecbloc/view/register/register_intro.dart';
 
 import '../../component/my_colors.dart';
 import '../../component/my_component.dart';
@@ -205,7 +205,11 @@ class BottomNavigation extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () => changeScreen(2),
+                  onPressed: () {
+                    // TODO
+                    Get.to(RegisterIntro());
+                    // changeScreen(2);
+                  },
                   icon: ImageIcon(
                     AssetImage(Assets.icons.write.path),
                     color: Colors.white,
