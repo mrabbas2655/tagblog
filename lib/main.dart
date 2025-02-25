@@ -9,17 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
 
 import 'component/my_colors.dart';
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) {
-        // اجازه می‌دهیم گواهی‌های نامعتبر را بپذیریم
-        return true; // همیشه true باشد تا تمام گواهی‌های SSL نامعتبر را بپذیرد
-      };
-  }
-}
+import 'my_http_overrides.dart';
 
 void main() async {
   // استفاده از MyHttpOverrides برای غیرفعال کردن تأیید گواهی SSL
