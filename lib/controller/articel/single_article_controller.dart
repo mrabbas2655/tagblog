@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:tecbloc/view/single.dart';
+import 'package:tecbloc/view/articel/single.dart';
 
-import '../Services/dio_service.dart';
-import '../component/api_constant.dart';
-import '../models/article_info_models.dart';
-import '../models/article_models.dart';
-import '../models/fake_data.dart';
-import '../models/tags_model.dart';
+import '../../Services/dio_service.dart';
+import '../../component/api_constant.dart';
+import '../../models/article_info_models.dart';
+import '../../models/article_models.dart';
+import '../../models/fake_data.dart';
+import '../../models/tags_model.dart';
 
 class SingleArticleController extends GetxController {
   RxBool loading = false.obs;

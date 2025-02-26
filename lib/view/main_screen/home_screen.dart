@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/controller/single_article_controller.dart';
+import 'package:tecbloc/controller/articel/single_article_controller.dart';
 import 'package:tecbloc/controller/home_screen_controller.dart';
-import 'package:tecbloc/view/articel_list_screen.dart';
+import 'package:tecbloc/view/articel/articel_list_screen.dart';
 
 import '../../component/my_colors.dart';
 import '../../component/my_component.dart';

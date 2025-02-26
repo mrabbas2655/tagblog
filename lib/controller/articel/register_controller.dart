@@ -8,7 +8,7 @@ import 'package:tecbloc/component/storage_const.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
 import 'package:tecbloc/view/register/register_intro.dart';
 
-import '../gen/assets.gen.dart';
+import '../../gen/assets.gen.dart';
 
 class RegisterController extends GetxController {
   TextEditingController editingTextEditingController = TextEditingController();

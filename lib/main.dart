@@ -7,8 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tecbloc/binding.dart';
+import 'package:tecbloc/view/articel/single.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
-import 'package:tecbloc/view/single.dart';
 import 'package:tecbloc/view/splash_screen.dart';
 
 import 'component/my_colors.dart';

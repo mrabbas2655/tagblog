@@ -7,8 +7,8 @@ import 'package:validators/validators.dart';
 
 import '../../controller/articel/register_controller.dart';
 
-class RegisterIntro extends StatelessWidget {
-  RegisterIntro({super.key});
+class ManageArticel extends StatelessWidget {
+  ManageArticel({super.key});
   // RegisterController registerController = Get.put(RegisterController());
   var registerController = Get.find<RegisterController>();
   @override
