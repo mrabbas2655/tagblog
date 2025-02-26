@@ -8,7 +8,7 @@ import 'package:tecbloc/gen/assets.gen.dart';
 import '../main.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Get.offAndToNamed(RouteMainScreen);
+      Get.offAndToNamed(MainRoute.routeMainScreen);
     });
     super.initState();
   }

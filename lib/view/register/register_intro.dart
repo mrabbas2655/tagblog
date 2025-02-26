@@ -5,7 +5,7 @@ import 'package:tecbloc/component/my_strings.dart';
 import 'package:tecbloc/gen/assets.gen.dart';
 import 'package:validators/validators.dart';
 
-import '../../controller/articel/register_controller.dart';
+import '../../controller/register_controller.dart';
 
 class RegisterIntro extends StatelessWidget {
   RegisterIntro({super.key});
@@ -30,7 +30,7 @@ class RegisterIntro extends StatelessWidget {
               RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                      text: MyStings.welcom, style: textTheme.headlineMedium)),
+                      text: MyStrings.welcom, style: textTheme.headlineMedium)),
               ElevatedButton(
                 onPressed: () {
                   _showModalBottomSheet(context, size, textTheme);
@@ -71,7 +71,7 @@ class RegisterIntro extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    MyStings.insertYourEmail,
+                    MyStrings.insertYourEmail,
                     style: textTheme.headlineMedium,
                   ),
                   Padding(
@@ -130,7 +130,7 @@ class RegisterIntro extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    MyStings.insertYourPass,
+                    MyStrings.activateCode,
                     style: textTheme.headlineMedium,
                   ),
                   Padding(

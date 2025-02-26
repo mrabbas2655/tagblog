@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 import '../component/api_constant.dart';
 
 class PosterModel {
@@ -18,6 +20,6 @@ class PosterModel {
     image = element['image'] != null
         ? ApiUrlConstant.hostDlUrl + element['image']!
         : 'https://example.com/default_image.jpg'; // مقدار پیش‌فرض معتبر
-    print('Image URL: $image'); // چاپ آدرس تصویر برای بررسی
+    debugPrint('Image URL: $image'); // چاپ آدرس تصویر برای بررسی
   }
 }

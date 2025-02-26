@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../Services/dio_service.dart';
@@ -18,16 +19,16 @@ class HomeScreenController extends GetxController {
     try {
       var response = await DioService().getMethod(ApiUrlConstant.getHomeItems);
 
-      print("API Response: ${response.data}"); // چاپ پاسخ API برای بررسی
+      debugPrint("API Response: ${response.data}"); // چاپ پاسخ API برای بررسی
 
       if (response.statusCode == 200) {
         response.data['top_visited'].forEach((element) {
-          print("Top Visited Item: $element");
+          debugPrint("Top Visited Item: $element");
           topVisitedList.add(ArticleModel.fromJson(element));
         });
 
         response.data['top_podcasts'].forEach((element) {
-          print(
+          debugPrint(
               "Top Podcast Item: $element"); // چاپ هر آیتم قبل از تبدیل به مدل
           topPodcasts.add(PodcastsModels.fromJson(element));
         });
@@ -35,12 +36,13 @@ class HomeScreenController extends GetxController {
         poster.value = PosterModel.fromJson(response.data['poster']);
       }
       response.data['tags'].forEach((element) {
-        print("Top Podcast Item: $element"); // چاپ هر آیتم قبل از تبدیل به مدل
+        debugPrint(
+            "Top Podcast Item: $element"); // چاپ هر آیتم قبل از تبدیل به مدل
         tagsList.add(TagsModel.fromJson(element));
       });
     } catch (e) {
       // مدیریت خطا
-      print("Error fetching data: $e");
+      debugPrint("Error fetching data: $e");
     } finally {
       loading.value =
           false; // پس از بارگذاری یا وقوع خطا، لودینگ به false تغییر می‌کند

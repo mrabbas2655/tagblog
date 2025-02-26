@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/controller/articel/register_controller.dart';
+import 'package:tecbloc/controller/register_controller.dart';
 import 'package:tecbloc/view/main_screen/profile_screen.dart';
 // پکیج share را وارد کنید
 import 'package:tecbloc/view/register/register_intro.dart';
@@ -91,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                     style: textTheme.headlineMedium,
                   ),
                   onTap: () {
-                    myLaunchUrl(MyStings.myGitUrl);
+                    myLaunchUrl(MyStrings.techBlogGithubUrl);
                   },
                 ),
                 Divider(
@@ -162,7 +162,7 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class BottomNavigation extends StatefulWidget {
-  BottomNavigation({
+  const BottomNavigation({
     super.key,
     required this.size,
     required this.bodyMargin,

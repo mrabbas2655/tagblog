@@ -371,7 +371,7 @@ class SeeMorePodcast extends StatelessWidget {
             color: SolidColors.seeMore,
           ),
           Text(
-            MyStings.viewMoreBlog,
+            MyStrings.viewHotestBlog,
             style: textTheme.displaySmall,
           )
         ],
@@ -406,7 +406,7 @@ class SeeMoreBlog extends StatelessWidget {
             color: SolidColors.seeMore,
           ),
           Text(
-            MyStings.viewHotestBlog,
+            MyStrings.viewHotestBlog,
             style: textTheme.displaySmall,
           )
         ],

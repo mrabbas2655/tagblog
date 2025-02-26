@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tecbloc/controller/articel/list_article_controller.dart';
 import 'package:tecbloc/controller/articel/single_article_controller.dart';
-import 'package:tecbloc/controller/list_article_controller.dart';
 
 import '../../component/my_component.dart';
 import '../../main.dart';
@@ -51,7 +51,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                   onTap: (() async {
                     await singleArticleController.getArticleInfo(
                         listArticleController.articleList[index].id);
-                    Get.toNamed(RouteSingleArticle);
+                    Get.toNamed(MainRoute.routeSingleArticle);
                   }),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

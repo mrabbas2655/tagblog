@@ -34,7 +34,7 @@ class DioService {
         return response;
       },
     ).catchError((err) {
-      if (err is DioError) {
+      if (err is DioException) {
         return err.response!;
       }
     });

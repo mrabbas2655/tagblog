@@ -1,166 +1,207 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/component/my_strings.dart';
-import 'package:tecbloc/gen/assets.gen.dart';
-import 'package:validators/validators.dart';
+import 'package:tecbloc/component/my_component.dart';
 
-import '../../controller/articel/register_controller.dart';
+import '../../component/my_strings.dart';
+import '../../controller/articel/manage_articel_controller.dart';
+import '../../models/article_models.dart';
 
 class ManageArticel extends StatelessWidget {
   ManageArticel({super.key});
-  // RegisterController registerController = Get.put(RegisterController());
-  var registerController = Get.find<RegisterController>();
+
+  final articelManageController = Get.put(ManageArticelController());
+
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                Assets.images.tcbot.path,
-                height: 100,
-                width: 100,
-              ),
-              RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                      text: MyStings.welcom, style: textTheme.headlineMedium)),
-              ElevatedButton(
-                onPressed: () {
-                  _showModalBottomSheet(context, size, textTheme);
-                },
-                child: Text(
-                  "بزن بریم",
-                  style: textTheme.displayLarge,
-                ),
-              )
-            ],
+        appBar: appBar("مدیریت مقاله"),
+        body: Obx(() {
+          // اگر در حال بارگذاری هستیم، لودینگ نمایش داده شود
+          if (articelManageController.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          // اگر لیست مقالات خالی بود، Empty State نمایش داده شود
+          if (articelManageController.articleList.isEmpty) {
+            return articleEmptyState(textTheme);
+          }
+
+          // در غیر اینصورت، لیست مقالات نمایش داده شود
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              itemCount: articelManageController.articleList.length,
+              itemBuilder: (context, index) {
+                var article = articelManageController.articleList[index];
+                return articleItem(article);
+              },
+            ),
+          );
+        }),
+        // دکمه در پایین صفحه
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(Size(Get.width / 3, 50))),
+            onPressed: () {
+              // TODO: عملیات رفتن به صفحه نوشتن مقاله
+            },
+            child: Text(
+              "بریم برای نوشتن یه مقاله باحال",
+              style: textTheme.displayLarge,
+            ),
           ),
         ),
       ),
     );
   }
 
-  Future<dynamic> _showModalBottomSheet(
-      BuildContext context, Size size, TextTheme textTheme) {
-    return showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            height: size.height / 3.2,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
+  // ویجت نمایش آیتم مقاله
+  Widget articleItem(ArticleModel article) {
+    String imageUrl = article.image ?? "";
+
+    // اطمینان از صحت URL تصویر
+    if (!imageUrl.startsWith("https://")) {
+      imageUrl = "https://techblog.sasansafari.com$imageUrl";
+    }
+    imageUrl = imageUrl.replaceAll(RegExp(r'(?<!:)//'), '/');
+    print("Fixed Image URL: $imageUrl");
+
+    return GestureDetector(
+      onTap: () {
+        // TODO: عملیات مورد نظر در زمان کلیک روی مقاله
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // تصویر مقاله
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) {
+                print("Image load error: $error");
+                return Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Icon(
+                    Icons.image_not_supported,
+                    color: Colors.grey,
+                    size: 50,
+                  ),
+                );
+              },
             ),
-            child: Center(
+            const SizedBox(width: 16),
+
+            // اطلاعات مقاله
+            Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    MyStings.insertYourEmail,
-                    style: textTheme.headlineMedium,
+                    article.title ?? "بدون عنوان",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(24),
-                    child: TextField(
-                        controller:
-                            registerController.editingTextEditingController,
-                        onChanged: (value) {
-                          isEmail(value);
-                        },
-                        decoration: InputDecoration(
-                            hintText: 'a.morsdi1384@gmail.com',
-                            hintStyle: textTheme.headlineSmall)),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Text(
+                        article.author ?? "نویسنده نامشخص",
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        "${article.view ?? 0} بازدید",
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ],
                   ),
-                  //a.morsdi1384@gmail.com
-                  ElevatedButton(
-                      onPressed: () {
-                        registerController.register();
-                        Navigator.pop(context);
-                        _activateCodeBottomSheet(context, size, textTheme);
-                      },
-                      child: Text(
-                        'بزن بریم',
-                        style: textTheme.displayLarge,
-                      ))
                 ],
               ),
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 
-  Future<dynamic> _activateCodeBottomSheet(
-      BuildContext context, Size size, TextTheme textTheme) {
-    return showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            height: size.height / 3.2,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
+  // ویجت نمایش Empty State
+  Widget articleEmptyState(TextTheme textTheme) {
+    return Stack(
+      children: [
+        // محتوای وسط صفحه (تصویر و متن)
+        Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/tobot_empty.png',
+                width: 100,
+                height: 100,
               ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    MyStings.insertYourPass,
-                    style: textTheme.headlineMedium,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(24),
-                    child: TextField(
-                        controller:
-                            registerController.activeCodeTextEditingController,
-                        onChanged: (value) {
-                          isUUID(value);
-                        },
-                        decoration: InputDecoration(
-                            hintText: '******',
-                            hintStyle: textTheme.headlineSmall)),
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        registerController.verify();
-                        // Navigator.of(context).pushReplacement(
-                        //     MaterialPageRoute(builder: (context) => MyCats()));
-                      },
-                      child: Text(
-                        'بزن بریم',
-                        style: textTheme.displayLarge,
-                      )),
-                ],
+              const SizedBox(height: 16),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: MyStrings.articleEmpty,
+                  style: textTheme.headlineMedium,
+                ),
               ),
-            ),
+            ],
           ),
-        );
-      },
+        ),
+
+        // دکمه در پایین صفحه
+        // Positioned(
+        //   bottom: 20,
+        //   left: 20,
+        //   right: 20,
+        //   child: ElevatedButton(
+        //     style: ElevatedButton.styleFrom(
+        //       minimumSize: const Size(double.infinity, 50), // دکمه تمام عرض
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.circular(16),
+        //       ),
+        //     ),
+        //     onPressed: () {
+        //       // TODO: عملیات رفتن به صفحه نوشتن مقاله
+        //     },
+        //     child: Text(
+        //       "بریم برای نوشتن یه مقاله باحال",
+        //       style: textTheme.displayLarge,
+        //     ),
+        //   ),
+        // ),
+      ],
     );
   }
 }

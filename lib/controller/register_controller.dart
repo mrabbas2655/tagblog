@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tecbloc/Services/dio_service.dart';
 import 'package:tecbloc/component/api_constant.dart';
 import 'package:tecbloc/component/storage_const.dart';
+import 'package:tecbloc/main.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
 import 'package:tecbloc/view/register/register_intro.dart';
 
@@ -27,9 +28,9 @@ class RegisterController extends GetxController {
     if (response.data != null && response.data['user_id'] != null) {
       email = editingTextEditingController.text;
       userId = response.data['user_id'];
-      print("Registration successful: $response");
+      debugPrint("Registration successful: $response");
     } else {
-      print("Registration failed: ${response.data}");
+      debugPrint("Registration failed: ${response.data}");
     }
   }
 
@@ -42,15 +43,15 @@ class RegisterController extends GetxController {
     };
     var response =
         await DioService().postMethod(map, ApiUrlConstant.postRegister);
-    print("Verification response: ${response.data}");
+    debugPrint("Verification response: ${response.data}");
     var status = response.data['response'];
     switch (status) {
       case 'verified':
         var box = GetStorage();
-        box.write(token, response.data['token']);
-        box.write(userId, response.data['user_id']);
-        print("Token: ${box.read(token)}");
-        print("User ID: ${box.read(userId)}");
+        box.write(StorageKey.token, response.data['token']);
+        box.write(StorageKey.userId, response.data['user_id']);
+        debugPrint("Token: ${box.read(StorageKey.token)}");
+        debugPrint("User ID: ${box.read(StorageKey.userId)}");
         Get.offAll(() => MainScreen());
         break;
       case "incorrect_code ":
@@ -63,7 +64,7 @@ class RegisterController extends GetxController {
   }
 
   toggleLogin() {
-    if (GetStorage().read(token) == null) {
+    if (GetStorage().read(StorageKey.token) == null) {
       Get.to(RegisterIntro());
     } else {
       routeToWriteBottomSheet();
@@ -105,9 +106,10 @@ class RegisterController extends GetxController {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        debugPrint('rr');
+                        Get.toNamed(MainRoute.manageArticel);
                       },
                       child: Container(
+                        color: Colors.white,
                         child: Row(
                           children: [
                             Image.asset(
@@ -125,6 +127,7 @@ class RegisterController extends GetxController {
                         debugPrint('rr');
                       },
                       child: Container(
+                        color: Colors.white,
                         child: Row(
                           children: [
                             Image.asset(

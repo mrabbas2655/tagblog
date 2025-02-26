@@ -113,33 +113,40 @@ class Loading extends StatelessWidget {
 //آپ بار اصلی پروژه
 PreferredSize appBar(String title) {
   return PreferredSize(
-    preferredSize: Size.fromHeight(80),
+    preferredSize: const Size.fromHeight(60),
     child: Padding(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12.0),
       child: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
           Padding(
             padding: const EdgeInsets.only(left: 16),
             child: Center(
-              child: Text(
-                title,
-                style: appBarTextStyle,
-              ),
-            ),
+                child: Text(
+              title,
+              style: appBarTextStyle,
+            )),
           ),
         ],
-        leading: Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-            color: SolidColors.primaryColor.withAlpha(100),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.white,
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: SolidColors.primaryColor.withBlue(100),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
       ),

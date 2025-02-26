@@ -3,10 +3,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'
+    show
+        GlobalCupertinoLocalizations,
+        GlobalMaterialLocalizations,
+        GlobalWidgetsLocalizations;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tecbloc/binding.dart';
+import 'package:tecbloc/view/articel/manage_articel.dart';
 import 'package:tecbloc/view/articel/single.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
 import 'package:tecbloc/view/splash_screen.dart';
@@ -40,13 +45,17 @@ class MyApp extends StatelessWidget {
       theme: lightTheme(textTheme),
       getPages: [
         GetPage(
-            name: RouteMainScreen,
+            name: MainRoute.routeMainScreen,
             page: () => MainScreen(),
             binding: RegisterBinding()),
         GetPage(
-            name: RouteSingleArticle,
+            name: MainRoute.routeSingleArticle,
             page: () => Single(),
             binding: ArticleBinding()),
+        GetPage(
+            name: MainRoute.manageArticel,
+            page: () => ManageArticel(),
+            binding: ArticleManageBinding()),
       ],
       home: SplashScreen(),
       locale: Locale('fa', ''),
@@ -129,5 +138,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-String RouteMainScreen = "/MainScreen";
-String RouteSingleArticle = "/SingleArticle";
+class MainRoute {
+  static String routeMainScreen = "/MainScreen";
+  static String routeSingleArticle = "/SingleArticle";
+  static String manageArticel = "/ManageArticel";
+}

@@ -41,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
                   width: 8,
                 ),
                 Text(
-                  MyStings.imageProfileEdit,
+                  MyStrings.imageProfileEdit,
                   style: textTheme.displaySmall,
                 )
               ],
@@ -68,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 45,
                 child: Center(
                   child: Text(
-                    MyStings.myFavPodcast,
+                    MyStrings.myFavPodcast,
                     style: textTheme.headlineMedium!.apply(color: Colors.black),
                   ),
                 ),
@@ -82,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 45,
                 child: Center(
                   child: Text(
-                    MyStings.myFavBlog,
+                    MyStrings.myFavBlog,
                     style: textTheme.headlineMedium!.apply(color: Colors.black),
                   ),
                 ),
@@ -96,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 45,
                 child: Center(
                   child: Text(
-                    MyStings.logOut,
+                    MyStrings.logOut,
                     style: textTheme.headlineMedium!.apply(color: Colors.black),
                   ),
                 ),

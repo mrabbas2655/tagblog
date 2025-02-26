@@ -40,7 +40,7 @@ class _MyCatsState extends State<MyCats> {
                   ),
                   SizedBox(height: 32),
                   Text(
-                    MyStings.successfulRegistration,
+                    MyStrings.successfulRegistration,
                     style: textTheme.headlineMedium,
                   ),
                   TextField(
@@ -53,7 +53,7 @@ class _MyCatsState extends State<MyCats> {
                   ),
                   SizedBox(height: 32),
                   Text(
-                    MyStings.chooseCats,
+                    MyStrings.chooseCats,
                     style: textTheme.headlineMedium,
                   ),
                   Padding(
@@ -78,7 +78,7 @@ class _MyCatsState extends State<MyCats> {
                                 if (!selectedTags.contains(tagList[index])) {
                                   selectedTags.add(tagList[index]);
                                 } else {
-                                  print("${tagList[index]}}exist");
+                                  debugPrint("${tagList[index]}}exist");
                                 }
                               });
                             },
