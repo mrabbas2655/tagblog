@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/controller/single_article_controller.dart';
 import 'package:tecbloc/controller/list_article_controller.dart';
+import 'package:tecbloc/controller/single_article_controller.dart';
 
 import '../component/my_component.dart';
+import '../main.dart';
 
 class ArticleListScreen extends StatefulWidget {
   const ArticleListScreen({super.key});
@@ -47,12 +48,11 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
               itemBuilder: (context, index) {
                 var article = listArticleController.articleList[index];
                 return GestureDetector(
-                  onTap: () {
-                    singleArticleController.id.value =
-                        int.parse(article.id.toString());
-                    singleArticleController.getArticleInfo(
+                  onTap: (() async {
+                    await singleArticleController.getArticleInfo(
                         listArticleController.articleList[index].id);
-                  },
+                    Get.toNamed(RouteSingleArticle);
+                  }),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 8.0), // فاصله بین آیتم‌ها

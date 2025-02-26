@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:tecbloc/controller/list_article_controller.dart';
+import 'package:tecbloc/controller/single_article_controller.dart';
 import 'package:tecbloc/gen/assets.gen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../component/my_colors.dart';
 import '../component/my_component.dart';
-import '../controller/single_article_controller.dart';
 import '../controller/home_screen_controller.dart';
-import '../controller/list_article_controller.dart';
 import 'articel_list_screen.dart';
 
 class Single extends StatefulWidget {
@@ -24,10 +24,7 @@ class Single extends StatefulWidget {
 
 class _SingleState extends State<Single> {
   late final WebViewController _controller;
-  SingleArticleController singleArticleController =
-      Get.put(SingleArticleController());
-  ListArticleController listArticleController =
-      Get.put(ListArticleController());
+  var singleArticleController = Get.find<SingleArticleController>();
 
   var textTheme;
   late double bodyMargin;

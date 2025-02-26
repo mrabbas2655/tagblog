@@ -178,9 +178,6 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  RegisterController _registerController =
-      Get.put(RegisterController(), permanent: false);
-
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -218,7 +215,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 IconButton(
                   onPressed: () {
                     // TODO
-                    _registerController.toggleLogin();
+                    Get.find<RegisterController>().toggleLogin();
                     // changeScreen(2);
                   },
                   icon: ImageIcon(
