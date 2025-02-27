@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:tecbloc/Services/pick_file.dart';
 import 'package:tecbloc/component/dimens.dart';
 import 'package:tecbloc/controller/articel/list_article_controller.dart';
+import 'package:tecbloc/view/articel/html_content_editor.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../component/my_component.dart';
@@ -200,7 +201,7 @@ class _SingleState extends State<SingleManageArticel> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Get.to(ArticleListScreen()),
+                  onTap: () => Get.to(() => HtmlContentEditor()),
                   child: SeeMoreBlog(
                     bodyMargin: Dimens.halfBodyMargin,
                     textTheme: textTheme,
