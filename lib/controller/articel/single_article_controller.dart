@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:tecbloc/view/articel/single.dart';
 
 import '../../Services/dio_service.dart';
-import '../../component/api_constant.dart';
+import '../../constant/api_constant.dart';
 import '../../models/article_info_models.dart';
 import '../../models/article_models.dart';
 import '../../models/fake_data.dart';
@@ -11,11 +11,12 @@ import '../../models/tags_model.dart';
 class SingleArticleController extends GetxController {
   RxBool loading = false.obs;
   RxInt id = RxInt(2);
-  Rx<ArticleInfoModels> articleInfoModels = ArticleInfoModels().obs;
+  Rx<ArticleInfoModels> articleInfoModels =
+      ArticleInfoModels(null, null, null).obs;
   RxList<TagsModel> tagsList = RxList();
   RxList<ArticleModel> releatedList = RxList();
   getArticleInfo(var id) async {
-    articleInfoModels = ArticleInfoModels().obs;
+    articleInfoModels = ArticleInfoModels(null, null, null).obs;
     loading.value = true; // شروع لودینگ
     var userId = "";
     var response = await DioService().getMethod(

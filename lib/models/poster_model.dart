@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../component/api_constant.dart';
+import '../constant/api_constant.dart';
 
 class PosterModel {
   String? id;

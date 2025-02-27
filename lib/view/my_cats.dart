@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tecbloc/component/my_strings.dart';
+import 'package:tecbloc/constant//my_strings.dart';
 import 'package:tecbloc/gen/assets.gen.dart';
 
-import '../component/my_colors.dart';
+import '../component/dimens.dart';
 import '../component/my_component.dart';
+import '../constant//my_colors.dart';
 import '../models/fake_data.dart';
 import 'main_screen/main_screen.dart';
 
@@ -21,13 +22,14 @@ class _MyCatsState extends State<MyCats> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+            padding: EdgeInsets.only(
+                left: Dimens.bodyMargin, right: Dimens.bodyMargin),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

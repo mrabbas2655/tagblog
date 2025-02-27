@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 import 'package:tecbloc/component/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../constant/my_colors.dart';
 import '../controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
-import 'my_colors.dart';
 
 HomeScreenController homeScreenController = Get.put(HomeScreenController());
 
@@ -152,4 +152,41 @@ PreferredSize appBar(String title) {
       ),
     ),
   );
+}
+
+class SeeMoreBlog extends StatelessWidget {
+  const SeeMoreBlog({
+    super.key,
+    required this.bodyMargin,
+    required this.textTheme,
+    required this.title,
+  });
+
+  final double bodyMargin;
+  final TextTheme textTheme;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        right: bodyMargin,
+        bottom: 8,
+      ),
+      child: Row(
+        children: [
+          ImageIcon(
+            AssetImage(
+              Assets.icons.bluePen.path,
+            ),
+            color: SolidColors.seeMore,
+          ),
+          Text(
+            title,
+            style: textTheme.displaySmall,
+          )
+        ],
+      ),
+    );
+  }
 }

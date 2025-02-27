@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tecbloc/component/dimens.dart';
 import 'package:tecbloc/controller/register_controller.dart';
 import 'package:tecbloc/view/main_screen/profile_screen.dart';
 // پکیج share را وارد کنید
 import 'package:tecbloc/view/register/register_intro.dart';
 
-import '../../component/my_colors.dart';
 import '../../component/my_component.dart';
-import '../../component/my_strings.dart';
+import '../../constant/my_colors.dart';
+import '../../constant/my_strings.dart';
 import '../../gen/assets.gen.dart';
 import 'home_screen.dart';
 
@@ -29,14 +30,15 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
+
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey, // اضافه کردن _scaffoldKey به Scaffold
         drawer: Drawer(
           backgroundColor: SolidColors.scaffoldBg,
           child: Padding(
-            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+            padding: EdgeInsets.only(
+                right: Dimens.bodyMargin, left: Dimens.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -139,18 +141,18 @@ class _MainScreenState extends State<MainScreen> {
                     HomeScreen(
                         size: size,
                         textTheme: textTheme,
-                        bodyMargin: bodyMargin),
+                        bodyMargin: Dimens.bodyMargin),
                     ProfileScreen(
                         size: size,
                         textTheme: textTheme,
-                        bodyMargin: bodyMargin),
+                        bodyMargin: Dimens.bodyMargin),
                     RegisterIntro(),
                   ],
                 )),
           ),
           BottomNavigation(
             size: size,
-            bodyMargin: bodyMargin,
+            bodyMargin: Dimens.bodyMargin,
             changeScreen: (int value) {
               selectedPageIndex.value = value;
             },
@@ -165,12 +167,12 @@ class BottomNavigation extends StatefulWidget {
   const BottomNavigation({
     super.key,
     required this.size,
-    required this.bodyMargin,
     required this.changeScreen,
+    required double bodyMargin,
   });
 
   final Size size;
-  final double bodyMargin;
+
   final Function(int) changeScreen;
 
   @override
@@ -194,7 +196,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         child: Padding(
           padding: EdgeInsets.only(
-              left: widget.bodyMargin, right: widget.bodyMargin),
+              left: Dimens.bodyMargin, right: Dimens.bodyMargin),
           child: Container(
             height: widget.size.height / 3,
             decoration: BoxDecoration(

@@ -7,8 +7,9 @@ import 'package:tecbloc/controller/articel/single_article_controller.dart';
 import 'package:tecbloc/gen/assets.gen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../component/my_colors.dart';
+import '../../component/dimens.dart';
 import '../../component/my_component.dart';
+import '../../constant/my_colors.dart';
 import '../../controller/home_screen_controller.dart';
 import 'articel_list_screen.dart';
 
@@ -27,7 +28,6 @@ class _SingleState extends State<Single> {
   var singleArticleController = Get.find<SingleArticleController>();
 
   var textTheme;
-  late double bodyMargin;
 
   @override
   void initState() {
@@ -50,7 +50,6 @@ class _SingleState extends State<Single> {
   Widget build(BuildContext context) {
     textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
-    bodyMargin = size.width / 10;
 
     return SafeArea(
       child: Scaffold(
@@ -93,8 +92,13 @@ class _SingleState extends State<Single> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Icon(Icons.arrow_back,
-                                      color: Colors.white, size: 24),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Icon(Icons.arrow_back,
+                                        color: Colors.white, size: 24),
+                                  ),
                                   Expanded(child: SizedBox()),
                                   Icon(Icons.bookmark_border,
                                       color: Colors.white, size: 24),
@@ -203,7 +207,8 @@ class _SingleState extends State<Single> {
           itemCount: singleArticleController.tagsList.length,
           itemBuilder: ((context, index) {
             return Padding(
-              padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 12),
+              padding:
+                  EdgeInsets.only(right: index == 0 ? Dimens.bodyMargin : 12),
               child: GestureDetector(
                   onTap: () async {
                     var tagId = singleArticleController.tagsList[index].id!;
@@ -237,7 +242,6 @@ class _SingleState extends State<Single> {
   Widget topVisited() {
     textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
-    bodyMargin = size.width / 10;
 
     return Obx(
       () => singleArticleController.releatedList.isEmpty
@@ -255,8 +259,8 @@ class _SingleState extends State<Single> {
                           singleArticleController.releatedList[index].id);
                     },
                     child: Padding(
-                      padding:
-                          EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                      padding: EdgeInsets.only(
+                          right: index == 0 ? Dimens.bodyMargin : 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

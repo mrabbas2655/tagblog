@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:tecbloc/component/my_strings.dart';
+import 'package:tecbloc/constant/my_strings.dart';
 import 'package:tecbloc/gen/assets.gen.dart';
 import 'package:validators/validators.dart';
 

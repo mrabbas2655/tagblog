@@ -2,8 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/component/my_component.dart';
+import 'package:tecbloc/main.dart';
 
-import '../../component/my_strings.dart';
+import '../../constant/my_strings.dart';
 import '../../controller/articel/manage_articel_controller.dart';
 import '../../models/article_models.dart';
 
@@ -50,6 +51,7 @@ class ManageArticel extends StatelessWidget {
                 fixedSize: MaterialStateProperty.all(Size(Get.width / 3, 50))),
             onPressed: () {
               // TODO: عملیات رفتن به صفحه نوشتن مقاله
+              Get.toNamed(MainRoute.singleManageArticel);
             },
             child: Text(
               "بریم برای نوشتن یه مقاله باحال",

@@ -6,9 +6,10 @@ import 'package:tecbloc/controller/articel/single_article_controller.dart';
 import 'package:tecbloc/controller/home_screen_controller.dart';
 import 'package:tecbloc/view/articel/articel_list_screen.dart';
 
-import '../../component/my_colors.dart';
+import '../../component/dimens.dart';
 import '../../component/my_component.dart';
-import '../../component/my_strings.dart';
+import '../../constant/my_colors.dart';
+import '../../constant/my_strings.dart';
 import '../../gen/assets.gen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,12 +17,11 @@ class HomeScreen extends StatefulWidget {
     super.key,
     required this.size,
     required this.textTheme,
-    required this.bodyMargin,
+    required double bodyMargin,
   });
 
   final Size size;
   final TextTheme textTheme;
-  final double bodyMargin;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -52,8 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             GestureDetector(
                               onTap: () => Get.to(ArticleListScreen()),
                               child: SeeMoreBlog(
-                                bodyMargin: widget.bodyMargin,
+                                bodyMargin: Dimens.bodyMargin,
                                 textTheme: widget.textTheme,
+                                title: MyStrings.viewHotestPodCasts,
                               ),
                             ),
                             SizedBox(height: 8),
@@ -61,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             GestureDetector(
                                 onTap: () => Get.to(ArticleListScreen()),
                                 child: SeeMorePodcast(
-                                  bodyMargin: widget.bodyMargin,
+                                  bodyMargin: Dimens.bodyMargin,
                                   textTheme: widget.textTheme,
                                 )),
                             SizedBox(height: 8),
@@ -147,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // },
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                  0, 8, index == 0 ? widget.bodyMargin : 15, 8),
+                  0, 8, index == 0 ? Dimens.bodyMargin : 15, 8),
               child: MainTags(
                 textTheme: widget.textTheme,
                 index: index,
@@ -176,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                        right: index == 0 ? widget.bodyMargin : 15),
+                        right: index == 0 ? Dimens.bodyMargin : 15),
                     child: CachedNetworkImage(
                       imageUrl:
                           homeScreenController.topVisitedList[index].image ??
@@ -260,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        right: index == 0 ? widget.bodyMargin : 15),
+                        right: index == 0 ? Dimens.bodyMargin : 15),
                     child: SizedBox(
                       width: widget.size.width / 2.1,
                       child: Text(
@@ -298,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                        right: index == 0 ? widget.bodyMargin : 15),
+                        right: index == 0 ? Dimens.bodyMargin : 15),
                     child: CachedNetworkImage(
                       imageUrl:
                           homeScreenController.topPodcasts[index].poster ?? '',
@@ -324,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        right: index == 0 ? widget.bodyMargin : 15),
+                        right: index == 0 ? Dimens.bodyMargin : 15),
                     child: SizedBox(
                       width: widget.size.width / 2.1,
                       child: Text(
@@ -348,18 +349,17 @@ class _HomeScreenState extends State<HomeScreen> {
 class SeeMorePodcast extends StatelessWidget {
   const SeeMorePodcast({
     super.key,
-    required this.bodyMargin,
     required this.textTheme,
+    required double bodyMargin,
   });
 
-  final double bodyMargin;
   final TextTheme textTheme;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        right: bodyMargin,
+        right: Dimens.bodyMargin,
         bottom: 8,
       ),
       child: Row(
@@ -367,41 +367,6 @@ class SeeMorePodcast extends StatelessWidget {
           ImageIcon(
             AssetImage(
               Assets.icons.microphon.path,
-            ),
-            color: SolidColors.seeMore,
-          ),
-          Text(
-            MyStrings.viewHotestBlog,
-            style: textTheme.displaySmall,
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class SeeMoreBlog extends StatelessWidget {
-  const SeeMoreBlog({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        right: bodyMargin,
-        bottom: 8,
-      ),
-      child: Row(
-        children: [
-          ImageIcon(
-            AssetImage(
-              Assets.icons.bluePen.path,
             ),
             color: SolidColors.seeMore,
           ),
