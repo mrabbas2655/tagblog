@@ -5,7 +5,7 @@ import 'package:tecbloc/component/my_component.dart';
 import 'package:tecbloc/main.dart';
 
 import '../../constant/my_strings.dart';
-import '../../controller/articel/manage_articel_controller.dart';
+import '../../controller/articel/manage_article_controller.dart';
 import '../../models/article_models.dart';
 
 class ManageArticel extends StatelessWidget {

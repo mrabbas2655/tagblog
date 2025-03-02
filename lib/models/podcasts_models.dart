@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../constant/api_constant.dart';
+import '../constant/api_url_constant.dart';
 
 class PodcastsModels {
   String? id;

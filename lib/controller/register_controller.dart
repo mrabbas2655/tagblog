@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tecbloc/Services/dio_service.dart';
-import 'package:tecbloc/constant/api_constant.dart';
+import 'package:tecbloc/constant/api_url_constant.dart';
 import 'package:tecbloc/constant/storage_const.dart';
 import 'package:tecbloc/main.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';

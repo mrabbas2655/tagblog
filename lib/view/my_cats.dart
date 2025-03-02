@@ -21,7 +21,6 @@ class _MyCatsState extends State<MyCats> {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(

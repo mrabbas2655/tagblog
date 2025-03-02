@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tecbloc/controller/articel/list_article_controller.dart';
-import 'package:tecbloc/controller/articel/manage_articel_controller.dart';
+import 'package:tecbloc/controller/articel/manage_article_controller.dart';
 import 'package:tecbloc/controller/articel/single_article_controller.dart';
 import 'package:tecbloc/controller/register_controller.dart';
 

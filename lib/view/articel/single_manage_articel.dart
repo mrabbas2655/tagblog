@@ -6,17 +6,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/Services/pick_file.dart';
 import 'package:tecbloc/component/dimens.dart';
-import 'package:tecbloc/controller/articel/list_article_controller.dart';
-import 'package:tecbloc/view/articel/html_content_editor.dart';
+import 'package:tecbloc/view/articel/articel_content_editor.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../component/my_component.dart';
 import '../../constant/my_colors.dart';
-import '../../controller/articel/manage_articel_controller.dart';
+import '../../controller/articel/manage_article_controller.dart';
 import '../../controller/file_controller.dart';
 import '../../controller/home_screen_controller.dart';
 import '../../gen/assets.gen.dart';
-import 'articel_list_screen.dart';
 
 class SingleManageArticel extends StatefulWidget {
   SingleManageArticel({
@@ -57,18 +55,18 @@ class _SingleState extends State<SingleManageArticel> {
         content: TextField(
           controller: manageArticelController.titleTextEditingController,
           keyboardType: TextInputType.text,
-          style: TextStyle(color: SolidColors.textTitle),
-          decoration: InputDecoration(hintText: "اینجا بنویس"),
+          style: const TextStyle(color: SolidColors.textTitle),
+          decoration: const InputDecoration(hintText: "اینجا بنویس"),
         ),
         backgroundColor: SolidColors.scaffoldBg,
-        titleStyle: TextStyle(color: SolidColors.textTitle),
+        titleStyle: const TextStyle(color: SolidColors.textTitle),
         radius: 8,
         confirm: ElevatedButton(
             onPressed: () {
               manageArticelController.updateTitle();
               Get.back();
             },
-            child: Text(
+            child: const Text(
               "ثبت",
               style: TextStyle(color: SolidColors.textTitle),
             )));
@@ -77,12 +75,11 @@ class _SingleState extends State<SingleManageArticel> {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Obx(
             () => Column(
               children: [
@@ -97,7 +94,7 @@ class _SingleState extends State<SingleManageArticel> {
                                       .articleInfoModels.value.image ??
                                   '',
                               placeholder: (context, url) =>
-                                  SpinKitPouringHourGlass(
+                                  const SpinKitPouringHourGlass(
                                 color: SolidColors.primaryColor,
                                 size: 35,
                               ),
@@ -118,7 +115,7 @@ class _SingleState extends State<SingleManageArticel> {
                       right: 0,
                       child: Container(
                         height: 60,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             end: Alignment.bottomCenter,
                             begin: Alignment.topCenter,
@@ -134,7 +131,7 @@ class _SingleState extends State<SingleManageArticel> {
                                 onTap: () {
                                   Get.back();
                                 },
-                                child: Icon(Icons.arrow_back,
+                                child: const Icon(Icons.arrow_back,
                                     color: Colors.white, size: 24),
                               ),
                             ],
@@ -154,7 +151,7 @@ class _SingleState extends State<SingleManageArticel> {
                             child: Container(
                               height: 30,
                               width: Get.width / 3,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: SolidColors.primaryColor,
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(12),
@@ -169,7 +166,7 @@ class _SingleState extends State<SingleManageArticel> {
                                     "انتخاب تصویر ",
                                     style: textTheme.titleMedium,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.add,
                                     color: Colors.white,
                                   )
@@ -180,7 +177,7 @@ class _SingleState extends State<SingleManageArticel> {
                         ))
                   ],
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 GestureDetector(
                   onTap: () => getTitle(),
                   child: SeeMoreBlog(
@@ -201,7 +198,7 @@ class _SingleState extends State<SingleManageArticel> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Get.to(() => HtmlContentEditor()),
+                  onTap: () => Get.to(() => ArticelContentEditor()),
                   child: SeeMoreBlog(
                     bodyMargin: Dimens.halfBodyMargin,
                     textTheme: textTheme,
@@ -244,18 +241,42 @@ class _SingleState extends State<SingleManageArticel> {
                         : const Center(child: CircularProgressIndicator()),
                   ),
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 GestureDetector(
-                  onTap: () => Get.to(ArticleListScreen()),
+                  onTap: () {
+                    chooseCatsBottomSheet(textTheme);
+                  },
                   child: SeeMoreBlog(
                     bodyMargin: Dimens.halfBodyMargin,
                     textTheme: textTheme,
                     title: "انتخاب دسته بندی ",
                   ),
                 ),
-                SizedBox(height: 6),
-                tags(),
-                SizedBox(height: 8),
+                const SizedBox(height: 6),
+                Padding(
+                  padding: EdgeInsets.all(Dimens.halfBodyMargin),
+                  child: Text(
+                    manageArticelController.articleInfoModels.value.catName ==
+                            null
+                        ? 'بدون عنوان'
+                        : manageArticelController
+                            .articleInfoModels.value.catName!,
+                    style: textTheme.titleLarge,
+                    maxLines: 2,
+                    textAlign: TextAlign.right,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ElevatedButton(
+                    onPressed: () async =>
+                        await manageArticelController.storeArticle(),
+                    child: Text(
+                      manageArticelController.isLoading.value
+                          ? "صبر کنید..."
+                          : "تموم شد",
+                      style: textTheme.displayMedium,
+                    )),
               ],
             ),
           ),
@@ -264,43 +285,83 @@ class _SingleState extends State<SingleManageArticel> {
     );
   }
 
-  Widget tags() {
+  Widget cats() {
+    var homeScreenController = Get.find<HomeScreenController>();
     return SizedBox(
-      height: 45,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: manageArticelController.tagsList.length,
-          itemBuilder: ((context, index) {
-            return Padding(
-              padding:
-                  EdgeInsets.only(right: index == 0 ? Dimens.bodyMargin : 12),
-              child: GestureDetector(
-                  onTap: () async {
-                    var tagId = manageArticelController.tagsList[index].id!;
+      height: Get.height / 1.6,
+      child: GridView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: homeScreenController.tagsList.length > 10
+            ? 10
+            : homeScreenController.tagsList.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () async {
+              manageArticelController.articleInfoModels.value.catId =
+                  homeScreenController.tagsList[index].id!;
 
-                    await Get.find<ListArticleController>()
-                        .getArticleListWithTagsId(tagId);
-
-                    // String tagName = singleArticleController.tagsList[index].title!;
-                    Get.to(ArticleListScreen());
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 14),
-                    child: Container(
-                      height: 80,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(24)),
-                          color: Colors.grey),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                          child: Text(
-                            manageArticelController.tagsList[index].title!,
-                            style: TextTheme.of(context).bodyMedium,
-                          )),
+              manageArticelController.articleInfoModels.update(
+                (val) {
+                  val?.catId = homeScreenController.tagsList[index].id!;
+                  val?.catName = homeScreenController.tagsList[index].title!;
+                },
+              );
+              Get.back();
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Container(
+                height: 20,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                  color: SolidColors.primaryColor,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                  child: Center(
+                    child: Text(
+                      homeScreenController.tagsList[index].title!,
+                      style: TextTheme.of(context).displayLarge,
                     ),
-                  )),
-            );
-          })),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+        ),
+      ),
     );
+  }
+
+  chooseCatsBottomSheet(TextTheme textTheme) {
+    Get.bottomSheet(
+        Container(
+          height: Get.height / 1.7,
+          width: Get.width,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const Text("انتخاب دسته بندی"),
+                SizedBox(height: Dimens.small),
+                Expanded(child: cats()),
+              ],
+            ),
+          ),
+        ),
+        isScrollControlled: true,
+        persistent: true);
   }
 }

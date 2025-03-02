@@ -49,7 +49,6 @@ class _SingleState extends State<Single> {
   @override
   Widget build(BuildContext context) {
     textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(

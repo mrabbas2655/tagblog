@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../Services/dio_service.dart';
-import '../constant/api_constant.dart';
+import '../constant/api_url_constant.dart';
 import '../models/article_models.dart';
 import '../models/podcasts_models.dart';
 import '../models/poster_model.dart';

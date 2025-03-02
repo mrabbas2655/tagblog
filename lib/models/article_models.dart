@@ -1,10 +1,11 @@
-import '../constant/api_constant.dart';
+import '../constant/api_url_constant.dart';
 
 class ArticleModel {
   String? id;
   String? title;
   String? image;
   String? catId;
+  String? content;
   String? catName;
   String? author;
   String? view;
@@ -18,6 +19,7 @@ class ArticleModel {
     this.catId,
     this.catName,
     this.author,
+    this.content,
     this.view,
     this.status,
     this.createdAt,
@@ -32,6 +34,7 @@ class ArticleModel {
     author = element["author"] ?? "ساسان صفری";
     view = element["view"] ?? "0";
     status = element["status"] ?? "";
+    content = element["content"] ?? "";
     createdAt = element["created_at"] ?? "";
   }
 }

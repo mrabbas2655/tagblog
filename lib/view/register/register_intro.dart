@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/constant/my_strings.dart';
@@ -7,10 +8,17 @@ import 'package:validators/validators.dart';
 
 import '../../controller/register_controller.dart';
 
-class RegisterIntro extends StatelessWidget {
+class RegisterIntro extends StatefulWidget {
   RegisterIntro({super.key});
+
+  @override
+  State<RegisterIntro> createState() => _RegisterIntroState();
+}
+
+class _RegisterIntroState extends State<RegisterIntro> {
   // RegisterController registerController = Get.put(RegisterController());
   var registerController = Get.find<RegisterController>();
+
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -134,17 +142,24 @@ class RegisterIntro extends StatelessWidget {
                     style: textTheme.headlineMedium,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(24),
-                    child: TextField(
+                      padding: EdgeInsets.all(24),
+                      child: TextField(
                         controller:
                             registerController.activeCodeTextEditingController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter
+                              .digitsOnly, // فقط اعداد قبول بشه
+                          LengthLimitingTextInputFormatter(
+                              6), // حداکثر ۶ رقم وارد بشه
+                        ],
                         onChanged: (value) {
                           isUUID(value);
                         },
                         decoration: InputDecoration(
-                            hintText: '******',
-                            hintStyle: textTheme.headlineSmall)),
-                  ),
+                            hintText: 'کد تایید (6 رقم)',
+                            hintStyle: textTheme.headlineSmall),
+                      )),
                   ElevatedButton(
                       onPressed: () {
                         registerController.verify();

@@ -1,4 +1,4 @@
-import 'package:tecbloc/constant/api_constant.dart';
+import 'package:tecbloc/constant/api_url_constant.dart';
 
 class ArticleInfoModels {
   String? id;

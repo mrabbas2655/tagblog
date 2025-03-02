@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:tecbloc/view/articel/single.dart';
 
 import '../../Services/dio_service.dart';
-import '../../constant/api_constant.dart';
+import '../../constant/api_url_constant.dart';
 import '../../models/article_info_models.dart';
 import '../../models/article_models.dart';
 import '../../models/fake_data.dart';
