@@ -27,8 +27,6 @@ class _SingleState extends State<Single> {
   late final WebViewController _controller;
   var singleArticleController = Get.find<SingleArticleController>();
 
-  var textTheme;
-
   @override
   void initState() {
     super.initState();
@@ -48,15 +46,15 @@ class _SingleState extends State<Single> {
 
   @override
   Widget build(BuildContext context) {
-    textTheme = Theme.of(context).textTheme;
+    var textTheme = Theme.of(context).textTheme;
 
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Obx(
             () => singleArticleController.articleInfoModels.value.title == null
-                ? SizedBox(height: Get.height, child: Loading())
+                ? SizedBox(height: Get.height, child: const Loading())
                 : Column(
                     children: [
                       Stack(
@@ -66,7 +64,7 @@ class _SingleState extends State<Single> {
                                     .articleInfoModels.value.image ??
                                 '',
                             placeholder: (context, url) =>
-                                SpinKitPouringHourGlass(
+                                const SpinKitPouringHourGlass(
                               color: SolidColors.primaryColor,
                               size: 35,
                             ),
@@ -81,7 +79,7 @@ class _SingleState extends State<Single> {
                             right: 0,
                             child: Container(
                               height: 60,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 gradient: LinearGradient(
                                   end: Alignment.bottomCenter,
                                   begin: Alignment.topCenter,
@@ -95,16 +93,16 @@ class _SingleState extends State<Single> {
                                     onTap: () {
                                       Get.back();
                                     },
-                                    child: Icon(Icons.arrow_back,
+                                    child: const Icon(Icons.arrow_back,
                                         color: Colors.white, size: 24),
                                   ),
-                                  Expanded(child: SizedBox()),
-                                  Icon(Icons.bookmark_border,
+                                  const Expanded(child: SizedBox()),
+                                  const Icon(Icons.bookmark_border,
                                       color: Colors.white, size: 24),
-                                  SizedBox(width: 10),
-                                  Icon(Icons.share,
+                                  const SizedBox(width: 10),
+                                  const Icon(Icons.share,
                                       color: Colors.white, size: 24),
-                                  SizedBox(width: 20),
+                                  const SizedBox(width: 20),
                                 ],
                               ),
                             ),
@@ -132,14 +130,14 @@ class _SingleState extends State<Single> {
                               backgroundImage:
                                   AssetImage(Assets.images.profileAvatar.path),
                             ),
-                            SizedBox(width: 12),
+                            const SizedBox(width: 12),
                             Text(
                               singleArticleController
                                       .articleInfoModels.value.author ??
                                   'ناشناس',
                               style: textTheme.headlineMedium,
                             ),
-                            SizedBox(width: 12),
+                            const SizedBox(width: 12),
                             Text(
                               singleArticleController
                                       .articleInfoModels.value.createdAt ??
@@ -186,9 +184,9 @@ class _SingleState extends State<Single> {
                                   child: CircularProgressIndicator()),
                         ),
                       ),
-                      SizedBox(height: 6),
-                      Tags(),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 6),
+                      tags(),
+                      const SizedBox(height: 8),
                       topVisited()
                     ],
                   ),
@@ -198,7 +196,7 @@ class _SingleState extends State<Single> {
     );
   }
 
-  Widget Tags() {
+  Widget tags() {
     return SizedBox(
       height: 45,
       child: ListView.builder(
@@ -216,17 +214,17 @@ class _SingleState extends State<Single> {
                         .getArticleListWithTagsId(tagId);
 
                     // String tagName = singleArticleController.tagsList[index].title!;
-                    Get.to(ArticleListScreen());
+                    Get.to(const ArticleListScreen());
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(left: 14),
+                    padding: const EdgeInsets.only(left: 14),
                     child: Container(
                       height: 80,
                       decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(24)),
                           color: Colors.grey),
                       child: Padding(
-                          padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                           child: Text(
                             singleArticleController.tagsList[index].title!,
                             style: TextTheme.of(context).bodyMedium,
@@ -239,12 +237,12 @@ class _SingleState extends State<Single> {
   }
 
   Widget topVisited() {
-    textTheme = Theme.of(context).textTheme;
+    var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
 
     return Obx(
       () => singleArticleController.releatedList.isEmpty
-          ? Center(child: Text('هیچ مورد بازدید شده‌ای وجود ندارد'))
+          ? const Center(child: Text('هیچ مورد بازدید شده‌ای وجود ندارد'))
           : SizedBox(
               height: size.height / 2.5,
               child: ListView.builder(
@@ -268,7 +266,7 @@ class _SingleState extends State<Single> {
                             width: size.width / 2.1,
                             decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
+                                  const BorderRadius.all(Radius.circular(16)),
                               image: item.image != null
                                   ? DecorationImage(
                                       image: NetworkImage(item.image!),
@@ -278,7 +276,7 @@ class _SingleState extends State<Single> {
                               color: Colors.grey[300], // رنگ پیش‌فرض برای خطا
                             ),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           SizedBox(
                             width: size.width / 2.1,
                             child: Text(
@@ -289,11 +287,11 @@ class _SingleState extends State<Single> {
                               softWrap: true,
                             ),
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Row(
                             children: [
-                              Icon(Icons.remove_red_eye, size: 16),
-                              SizedBox(width: 4),
+                              const Icon(Icons.remove_red_eye, size: 16),
+                              const SizedBox(width: 4),
                               Text('${item.id ?? 0} بازدید',
                                   style: textTheme.displaySmall),
                             ],

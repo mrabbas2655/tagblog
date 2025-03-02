@@ -31,12 +31,12 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
         // فرض کنید در کنترلر شما یک RxList داریم
         body: Obx(() {
           if (listArticleController.loading.value) {
-            return Center(
+            return const Center(
                 child: CircularProgressIndicator()); // نمایش حالت بارگذاری
           }
 
           if (listArticleController.articleList.isEmpty) {
-            return Center(
+            return const Center(
                 child: Text("هیچ مقاله‌ای یافت نشد.")); // پیام خالی بودن لیست
           }
 
@@ -68,7 +68,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                               height: 100, // ارتفاع تصویر
                               decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
+                                    const BorderRadius.all(Radius.circular(16)),
                                 image: DecorationImage(
                                   image: imageProvider,
                                   fit: BoxFit.cover,
@@ -76,7 +76,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                               ),
                             );
                           },
-                          placeholder: (context, url) => Loading(),
+                          placeholder: (context, url) => const Loading(),
                           errorWidget: (context, url, error) => Container(
                             height: Get.height / 6,
                             width: Get.width / 3,
@@ -84,14 +84,14 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                               color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.image_not_supported,
                               color: Colors.grey,
                               size: 50,
                             ),
                           ),
                         ),
-                        SizedBox(width: 16), // فاصله بین تصویر و متن
+                        const SizedBox(width: 16), // فاصله بین تصویر و متن
                         // اطلاعات مقاله
                         Expanded(
                           child: Column(
@@ -101,23 +101,23 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                                 article.title!,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
                               ),
-                              SizedBox(height: 8), // فاصله بین متن‌ها
+                              const SizedBox(height: 8), // فاصله بین متن‌ها
                               Row(
                                 children: [
                                   Text(
                                     article.author!,
-                                    style: TextStyle(color: Colors.grey),
+                                    style: const TextStyle(color: Colors.grey),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                       width: 8), // فاصله بین نویسنده و بازدید
                                   Text(
                                     "${article.view!} بازدید",
-                                    style: TextStyle(color: Colors.grey),
+                                    style: const TextStyle(color: Colors.grey),
                                   ),
                                 ],
                               )

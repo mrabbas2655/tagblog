@@ -46,31 +46,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             poster(),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             tags(),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             GestureDetector(
-                              onTap: () => Get.to(ArticleListScreen()),
+                              onTap: () => Get.to(const ArticleListScreen()),
                               child: SeeMoreBlog(
                                 bodyMargin: Dimens.bodyMargin,
                                 textTheme: widget.textTheme,
                                 title: MyStrings.viewHotestPodCasts,
                               ),
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             topVisited(),
                             GestureDetector(
-                                onTap: () => Get.to(ArticleListScreen()),
+                                onTap: () => Get.to(const ArticleListScreen()),
                                 child: SeeMorePodcast(
                                   bodyMargin: Dimens.bodyMargin,
                                   textTheme: widget.textTheme,
                                 )),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             topPodcasts(),
-                            SizedBox(height: 68),
+                            const SizedBox(height: 68),
                           ],
                         )
-                      : Loading(),
+                      : const Loading(),
                 )),
           ),
         ),
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           width: widget.size.width / 1.19,
           height: widget.size.height / 4.2,
-          foregroundDecoration: BoxDecoration(
+          foregroundDecoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(15)),
             gradient: LinearGradient(
               colors: GradientColors.homePosterCoverGradiant,
@@ -102,16 +102,16 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
                   image:
                       DecorationImage(image: imageProvider, fit: BoxFit.cover),
                 ),
               ),
             ),
-            placeholder: (context, url) => Loading(),
+            placeholder: (context, url) => const Loading(),
             errorWidget: (context, url, error) {
               // چاپ خطا برای بررسی
-              return Icon(Icons.image_not_supported,
+              return const Icon(Icons.image_not_supported,
                   size: 50, color: Colors.grey);
             },
           ),
@@ -184,16 +184,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               '',
                       imageBuilder: (context, imageProvider) => Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
                           image: DecorationImage(
                               image: imageProvider, fit: BoxFit.cover),
                         ),
                       ),
-                      placeholder: (context, url) => SpinKitPouringHourGlass(
+                      placeholder: (context, url) =>
+                          const SpinKitPouringHourGlass(
                         color: SolidColors.primaryColor,
                         size: 35,
                       ),
-                      errorWidget: (context, url, error) => Icon(
+                      errorWidget: (context, url, error) => const Icon(
                         Icons.image_not_supported,
                         size: 50,
                         color: Colors.grey,
@@ -204,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: widget.size.height / 4.1,
                     width: widget.size.width / 2.1,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
                       image: DecorationImage(
                         image: NetworkImage(
                           homeScreenController.topVisitedList[index].image ??
@@ -213,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    foregroundDecoration: BoxDecoration(
+                    foregroundDecoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                       gradient: LinearGradient(
                         colors: GradientColors.blogPost,
@@ -246,8 +248,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       '0'), // مقدار پیش‌فرض
                                   style: widget.textTheme.displayMedium,
                                 ),
-                                SizedBox(width: 8),
-                                Icon(
+                                const SizedBox(width: 8),
+                                const Icon(
                                   Icons.remove_red_eye,
                                   color: Colors.white,
                                   size: 16,
@@ -305,17 +307,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           homeScreenController.topPodcasts[index].poster ?? '',
                       imageBuilder: (context, imageProvider) => Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
                           image: DecorationImage(
                             image: imageProvider,
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      placeholder: (context, url) => Loading(),
+                      placeholder: (context, url) => const Loading(),
                       errorWidget: (context, url, error) {
                         // چاپ خطا برای دیباگ
-                        return Icon(
+                        return const Icon(
                           Icons.image_not_supported,
                           size: 50,
                           color: Colors.grey,

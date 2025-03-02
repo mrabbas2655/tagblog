@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   onTap: () {},
                 ),
-                Divider(
+                const Divider(
                   color: SolidColors.dividerColor,
                 ),
                 ListTile(
@@ -64,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   onTap: () {},
                 ),
-                Divider(
+                const Divider(
                   color: SolidColors.dividerColor,
                 ),
                 ListTile(
@@ -84,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                     //   );
                   },
                 ),
-                Divider(
+                const Divider(
                   color: SolidColors.dividerColor,
                 ),
                 ListTile(
@@ -96,7 +96,7 @@ class _MainScreenState extends State<MainScreen> {
                     myLaunchUrl(MyStrings.techBlogGithubUrl);
                   },
                 ),
-                Divider(
+                const Divider(
                   color: SolidColors.dividerColor,
                 ),
               ],
@@ -116,7 +116,7 @@ class _MainScreenState extends State<MainScreen> {
                     _scaffoldKey.currentState
                         ?.openDrawer(); // استفاده از _scaffoldKey
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.menu,
                     color: Colors.black,
                   ),
@@ -146,7 +146,7 @@ class _MainScreenState extends State<MainScreen> {
                         size: size,
                         textTheme: textTheme,
                         bodyMargin: Dimens.bodyMargin),
-                    RegisterIntro(),
+                    const RegisterIntro(),
                   ],
                 )),
           ),
@@ -188,7 +188,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       right: 0,
       child: Container(
         height: widget.size.height / 13,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: GradientColors.bottomNavBackground,
               begin: Alignment.topCenter,
@@ -199,7 +199,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               left: Dimens.bodyMargin, right: Dimens.bodyMargin),
           child: Container(
             height: widget.size.height / 3,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 gradient: LinearGradient(
                   colors: GradientColors.bottomNav,

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'
+import "package:flutter_localizations/flutter_localizations.dart"
     show
         GlobalCupertinoLocalizations,
         GlobalMaterialLocalizations,
@@ -25,7 +25,7 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   // تنظیمات ظاهری سیستم (مانند رنگ نوار وضعیت)
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: SolidColors.statusBarColor,
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: SolidColors.systemNavigationBarColor));
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
             name: MainRoute.routeMainScreen,
-            page: () => MainScreen(),
+            page: () => const MainScreen(),
             binding: RegisterBinding()),
         GetPage(
             name: MainRoute.routeSingleArticle,
@@ -62,8 +62,8 @@ class MyApp extends StatelessWidget {
             page: () => SingleManageArticel(),
             binding: ArticleManageBinding()),
       ],
-      home: SplashScreen(),
-      locale: Locale('fa', ''),
+      home: const SplashScreen(),
+      locale: const Locale('fa', ''),
       supportedLocales: const [
         Locale('fa', ''),
         Locale('en', ''),
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Colors.black, width: 4),
+          borderSide: const BorderSide(color: Colors.black, width: 4),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -105,7 +105,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       fontFamily: 'dana',
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         displayLarge: TextStyle(
             fontFamily: 'dana',
             fontSize: 16,

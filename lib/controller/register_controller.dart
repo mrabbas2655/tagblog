@@ -52,7 +52,7 @@ class RegisterController extends GetxController {
         box.write(StorageKey.userId, response.data['user_id']);
         debugPrint("Token: ${box.read(StorageKey.token)}");
         debugPrint("User ID: ${box.read(StorageKey.userId)}");
-        Get.offAll(() => MainScreen());
+        Get.offAll(() => const MainScreen());
         break;
       case "incorrect_code ":
         Get.snackbar("error", "no code register");
@@ -65,7 +65,7 @@ class RegisterController extends GetxController {
 
   toggleLogin() {
     if (GetStorage().read(StorageKey.token) == null) {
-      Get.to(RegisterIntro());
+      Get.to(const RegisterIntro());
     } else {
       routeToWriteBottomSheet();
     }
@@ -75,7 +75,7 @@ class RegisterController extends GetxController {
     Get.bottomSheet(
       Container(
         height: Get.height / 3,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
@@ -92,12 +92,12 @@ class RegisterController extends GetxController {
                     Assets.images.tcbot.path,
                     height: 40,
                   ),
-                  SizedBox(width: 12),
-                  Text("دونسته هات رو با بقیه به اشتراک بذار ...")
+                  const SizedBox(width: 12),
+                  const Text("دونسته هات رو با بقیه به اشتراک بذار ...")
                 ],
               ),
-              SizedBox(height: 18),
-              Text(
+              const SizedBox(height: 18),
+              const Text(
                   """فکر کن !!  اینجا بودنت به این معناست که یک گیک تکنولوژی هستی
 دونسته هات رو با  جامعه‌ی گیک های فارسی زبان به اشتراک بذار.."""),
               Expanded(
@@ -116,8 +116,8 @@ class RegisterController extends GetxController {
                               Assets.icons.writeArticleIcon.path,
                               height: 40,
                             ),
-                            SizedBox(width: 8),
-                            Text("مدیریت مقاله ها")
+                            const SizedBox(width: 8),
+                            const Text("مدیریت مقاله ها")
                           ],
                         ),
                       ),
@@ -134,8 +134,8 @@ class RegisterController extends GetxController {
                               Assets.icons.writePodcastIcon.path,
                               height: 40,
                             ),
-                            SizedBox(width: 8),
-                            Text("مدیریت پادکست ها")
+                            const SizedBox(width: 8),
+                            const Text("مدیریت پادکست ها")
                           ],
                         ),
                       ),

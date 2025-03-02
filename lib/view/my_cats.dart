@@ -25,7 +25,7 @@ class _MyCatsState extends State<MyCats> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.only(
                 left: Dimens.bodyMargin, right: Dimens.bodyMargin),
@@ -34,12 +34,12 @@ class _MyCatsState extends State<MyCats> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   SvgPicture.asset(
                     Assets.images.tcbot.path,
                     height: 100,
                   ),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   Text(
                     MyStrings.successfulRegistration,
                     style: textTheme.headlineMedium,
@@ -52,7 +52,7 @@ class _MyCatsState extends State<MyCats> {
                       hintStyle: textTheme.headlineSmall,
                     ),
                   ),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   Text(
                     MyStrings.chooseCats,
                     style: textTheme.headlineMedium,
@@ -66,7 +66,8 @@ class _MyCatsState extends State<MyCats> {
                         scrollDirection: Axis.horizontal,
                         itemCount: tagList.length,
                         shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 5,
                           childAspectRatio: 0.3,
@@ -92,7 +93,7 @@ class _MyCatsState extends State<MyCats> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   Image.asset(
                     Assets.icons.downCatArrow.path,
                     scale: 2,
@@ -107,7 +108,8 @@ class _MyCatsState extends State<MyCats> {
                         scrollDirection: Axis.horizontal,
                         itemCount: selectedTags.length,
                         shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 5,
                           childAspectRatio: 0.3,
@@ -116,7 +118,7 @@ class _MyCatsState extends State<MyCats> {
                         itemBuilder: (context, index) {
                           return Container(
                               height: 60,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(24),
                                   ),
@@ -137,7 +139,7 @@ class _MyCatsState extends State<MyCats> {
                                           selectedTags.removeAt(index);
                                         });
                                       },
-                                      child: Icon(
+                                      child: const Icon(
                                         CupertinoIcons.delete,
                                         color: Colors.grey,
                                         size: 20,
@@ -153,7 +155,7 @@ class _MyCatsState extends State<MyCats> {
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => MainScreen()));
+                            builder: (context) => const MainScreen()));
                       },
                       child: Text(
                         "بریم",

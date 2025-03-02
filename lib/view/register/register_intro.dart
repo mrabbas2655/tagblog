@@ -9,7 +9,7 @@ import 'package:validators/validators.dart';
 import '../../controller/register_controller.dart';
 
 class RegisterIntro extends StatefulWidget {
-  RegisterIntro({super.key});
+  const RegisterIntro({super.key});
 
   @override
   State<RegisterIntro> createState() => _RegisterIntroState();
@@ -66,7 +66,7 @@ class _RegisterIntroState extends State<RegisterIntro> {
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
             height: size.height / 3.2,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
@@ -83,7 +83,7 @@ class _RegisterIntroState extends State<RegisterIntro> {
                     style: textTheme.headlineMedium,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(24),
                     child: TextField(
                         controller:
                             registerController.editingTextEditingController,
@@ -125,7 +125,7 @@ class _RegisterIntroState extends State<RegisterIntro> {
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
             height: size.height / 3.2,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
@@ -142,7 +142,7 @@ class _RegisterIntroState extends State<RegisterIntro> {
                     style: textTheme.headlineMedium,
                   ),
                   Padding(
-                      padding: EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(24),
                       child: TextField(
                         controller:
                             registerController.activeCodeTextEditingController,

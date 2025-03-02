@@ -48,7 +48,7 @@ class ManageArticel extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(Size(Get.width / 3, 50))),
+                fixedSize: WidgetStateProperty.all(Size(Get.width / 3, 50))),
             onPressed: () {
               // TODO: عملیات رفتن به صفحه نوشتن مقاله
               Get.toNamed(MainRoute.singleManageArticel);
@@ -72,7 +72,7 @@ class ManageArticel extends StatelessWidget {
       imageUrl = "https://techblog.sasansafari.com$imageUrl";
     }
     imageUrl = imageUrl.replaceAll(RegExp(r'(?<!:)//'), '/');
-    print("Fixed Image URL: $imageUrl");
+    debugPrint("Fixed Image URL: $imageUrl");
 
     return GestureDetector(
       onTap: () {
@@ -101,7 +101,7 @@ class ManageArticel extends StatelessWidget {
               },
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) {
-                print("Image load error: $error");
+                debugPrint("Image load error: $error");
                 return Container(
                   width: 100,
                   height: 100,

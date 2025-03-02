@@ -50,7 +50,7 @@ class MainTags extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(24),
         ),
@@ -103,7 +103,7 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpinKitPouringHourGlass(
+    return const SpinKitPouringHourGlass(
       color: SolidColors.primaryColor,
       size: 35,
     );

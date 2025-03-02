@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
               Assets.images.profileAvatar.path,
               height: 100,
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -36,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
                   color: SolidColors.seeMore,
                   height: 30,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text(
@@ -45,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Text(
@@ -56,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
               "a.morsedi1384@gmail.com ",
               style: textTheme.headlineMedium!.apply(color: Colors.black),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             TechDivider(size: size),
@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 136),
+            const SizedBox(height: 136),
           ],
         ));
   }

@@ -38,10 +38,12 @@ class DioService {
         log(response.statusCode.toString());
         return response;
       },
-    ).catchError((err) {
-      if (err is DioException) {
-        return err.response!;
-      }
-    });
+    )
+      ..catchError((err) {
+        if (err is DioException) {
+          return err.response!;
+        }
+        return null; // یا می‌توانید return err; استفاده کنید
+      });
   }
 }
