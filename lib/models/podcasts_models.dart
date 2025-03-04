@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 import '../constant/api_url_constant.dart';
 
 class PodcastsModels {
@@ -27,9 +25,7 @@ class PodcastsModels {
     id = element['id'] ?? 'Unknown ID';
     title = element['title'] ?? 'Untitled';
     // ساخت URL تصویر و چاپ آن برای دیباگ
-    poster =
-        ApiUrlConstant.hostDlUrl + (element['poster'] ?? 'default_image.jpg');
-    debugPrint('Poster URL: $poster'); // چاپ آدرس تصویر برای بررسی
+    poster = ApiUrlConstant.hostDlUrl + (element['poster'] ?? '');
 
     catName = element['cat_name'] ?? 'No Category';
     author = element['author'] ?? 'Unknown Author';

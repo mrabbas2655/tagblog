@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/controller/articel/single_article_controller.dart';
 import 'package:tecbloc/controller/home_screen_controller.dart';
+import 'package:tecbloc/main.dart';
 import 'package:tecbloc/view/articel/articel_list_screen.dart';
 
 import '../../component/dimens.dart';
@@ -292,54 +293,64 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollDirection: Axis.horizontal,
           itemCount: homeScreenController.topPodcasts.length,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                singleArticleController
-                    .getArticleInfo(homeScreenController.topPodcasts[index].id);
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: index == 0 ? Dimens.bodyMargin : 15),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          homeScreenController.topPodcasts[index].poster ?? '',
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16)),
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
+            return Padding(
+              padding:
+                  EdgeInsets.only(right: index == 0 ? Dimens.bodyMargin : 15),
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(MainRoute.singlePodcastArticel,
+                      arguments: homeScreenController.topPodcasts[index]);
+                },
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: index == 0 ? Dimens.bodyMargin : 15),
+                      child: CachedNetworkImage(
+                        height: 150,
+                        imageUrl:
+                            homeScreenController.topPodcasts[index].poster ??
+                                "",
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            const SpinKitPouringHourGlass(
+                          color: SolidColors.primaryColor,
+                          size: 35,
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          color: Colors.red,
+                          width: 150,
+                          height: 150,
+                          child: const Icon(
+                            Icons.image_not_supported,
+                            size: 50,
+                            color: Colors.white,
                           ),
                         ),
                       ),
-                      placeholder: (context, url) => const Loading(),
-                      errorWidget: (context, url, error) {
-                        // چاپ خطا برای دیباگ
-                        return const Icon(
-                          Icons.image_not_supported,
-                          size: 50,
-                          color: Colors.grey,
-                        );
-                      },
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: index == 0 ? Dimens.bodyMargin : 15),
-                    child: SizedBox(
-                      width: widget.size.width / 2.1,
-                      child: Text(
-                        homeScreenController.topPodcasts[index].title ?? '',
-                        style: widget.textTheme.headlineMedium,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: index == 0 ? Dimens.bodyMargin : 15),
+                      child: SizedBox(
+                        width: widget.size.width / 2.1,
+                        child: Text(
+                          homeScreenController.topPodcasts[index].title ?? '',
+                          style: widget.textTheme.headlineMedium,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             );
           },

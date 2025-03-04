@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tecbloc/component/decorations.dart';
 import 'package:tecbloc/component/dimens.dart';
 import 'package:tecbloc/controller/register_controller.dart';
 import 'package:tecbloc/view/main_screen/profile_screen.dart';
@@ -199,11 +200,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               left: Dimens.bodyMargin, right: Dimens.bodyMargin),
           child: Container(
             height: widget.size.height / 3,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                gradient: LinearGradient(
-                  colors: GradientColors.bottomNav,
-                )),
+            decoration: MyDecorations.mainGradient,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

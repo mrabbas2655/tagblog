@@ -28,7 +28,9 @@ dependencies:
   file_picker: ^8.3.7
   flutter_quill: ^11.0.0
   html_editor_enhanced: ^2.6.0
-
+  just_audio: ^0.9.46
+  percent_indicator: ^4.2.3
+  audio_video_progress_bar: ^2.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
