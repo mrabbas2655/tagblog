@@ -1,17 +1,20 @@
-# untitled8
+# 🏷️ TagBlog
 
-A new Flutter project.
+**TagBlog** یک وبلاگ ساده و سبک است که امکان مدیریت و نمایش مقالات را با استفاده از **برچسب‌ها (Tags)** فراهم می‌کند. این پروژه با هدف ساخت یک سیستم وبلاگ‌نویسی سریع، کاربرپسند و کم‌حجم طراحی شده است.
 
-## Getting Started
+## 🚀 ویژگی‌ها  
+- **مدیریت مقالات** با امکان ویرایش و حذف  
+- **دسته‌بندی مقالات بر اساس برچسب‌ها** برای جستجوی راحت‌تر  
+- **رابط کاربری ساده و مینیمال**  
+- **پشتیبانی از پایگاه داده** برای ذخیره‌سازی مقالات  
 
-This project is a starting point for a Flutter application.
+## 🛠️ تکنولوژی‌های استفاده‌شده  
+- **Flutter** (برای رابط کاربری)  
+- **Dart** (زبان برنامه‌نویسی)  
+- **Firebase / SQLite** (برای ذخیره داده‌ها)  
+- **Provider / Riverpod** (برای مدیریت وضعیت)  
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
- 
+## 📂 نحوه نصب و اجرا  
+1. ابتدا مخزن را کلون کنید:  
+   ```sh
+   git clone https://github.com/mrabbas2655/tagblog.git
