@@ -214,6 +214,7 @@ class SinglePodcast extends StatelessWidget {
                             await controller.player.seekToNext();
                             controller.currentFileIndex.value =
                                 controller.player.currentIndex!;
+                            controller.timerCheck();
                           },
                           child: const Icon(
                             Icons.skip_next,

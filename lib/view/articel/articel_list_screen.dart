@@ -5,7 +5,7 @@ import 'package:tecbloc/controller/articel/list_article_controller.dart';
 import 'package:tecbloc/controller/articel/single_article_controller.dart';
 
 import '../../component/my_component.dart';
-import '../../main.dart';
+import '../../route_manager/names.dart';
 
 class ArticleListScreen extends StatefulWidget {
   const ArticleListScreen({super.key});
@@ -51,7 +51,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
                   onTap: (() async {
                     await singleArticleController.getArticleInfo(
                         listArticleController.articleList[index].id);
-                    Get.toNamed(MainRoute.routeSingleArticle);
+                    Get.toNamed(NamedRoute.routeSingleArticle);
                   }),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

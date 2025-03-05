@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/component/my_component.dart';
-import 'package:tecbloc/main.dart';
 
 import '../../constant/my_strings.dart';
 import '../../controller/articel/manage_article_controller.dart';
 import '../../models/article_models.dart';
+import '../../route_manager/names.dart';
 
 class ManageArticel extends StatelessWidget {
   ManageArticel({super.key});
@@ -51,7 +51,7 @@ class ManageArticel extends StatelessWidget {
                 fixedSize: WidgetStateProperty.all(Size(Get.width / 3, 50))),
             onPressed: () {
               // TODO: عملیات رفتن به صفحه نوشتن مقاله
-              Get.toNamed(MainRoute.singleManageArticel);
+              Get.toNamed(NamedRoute.singleManageArticel);
             },
             child: Text(
               "بریم برای نوشتن یه مقاله باحال",

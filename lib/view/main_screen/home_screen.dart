@@ -4,7 +4,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tecbloc/controller/articel/single_article_controller.dart';
 import 'package:tecbloc/controller/home_screen_controller.dart';
-import 'package:tecbloc/main.dart';
 import 'package:tecbloc/view/articel/articel_list_screen.dart';
 
 import '../../component/dimens.dart';
@@ -12,6 +11,7 @@ import '../../component/my_component.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/my_strings.dart';
 import '../../gen/assets.gen.dart';
+import '../../route_manager/names.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -298,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   EdgeInsets.only(right: index == 0 ? Dimens.bodyMargin : 15),
               child: GestureDetector(
                 onTap: () {
-                  Get.toNamed(MainRoute.singlePodcastArticel,
+                  Get.toNamed(NamedRoute.singlePodcastArticel,
                       arguments: homeScreenController.topPodcasts[index]);
                 },
                 child: Column(

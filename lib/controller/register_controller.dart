@@ -5,11 +5,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tecbloc/Services/dio_service.dart';
 import 'package:tecbloc/constant/api_url_constant.dart';
 import 'package:tecbloc/constant/storage_const.dart';
-import 'package:tecbloc/main.dart';
 import 'package:tecbloc/view/main_screen/main_screen.dart';
 import 'package:tecbloc/view/register/register_intro.dart';
 
 import '../../gen/assets.gen.dart';
+import '../route_manager/names.dart';
 
 class RegisterController extends GetxController {
   TextEditingController editingTextEditingController = TextEditingController();
@@ -106,7 +106,7 @@ class RegisterController extends GetxController {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(MainRoute.manageArticel);
+                        Get.toNamed(NamedRoute.manageArticel);
                       },
                       child: Container(
                         color: Colors.white,

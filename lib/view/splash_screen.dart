@@ -5,7 +5,7 @@ import 'package:tecbloc/component/dimens.dart';
 import 'package:tecbloc/constant/my_colors.dart';
 import 'package:tecbloc/gen/assets.gen.dart';
 
-import '../main.dart';
+import '../route_manager/names.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Get.offAndToNamed(MainRoute.routeMainScreen);
+      Get.offAndToNamed(NamedRoute.routeMainScreen);
     });
     super.initState();
   }

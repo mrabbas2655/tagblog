@@ -10,13 +10,8 @@ import "package:flutter_localizations/flutter_localizations.dart"
         GlobalWidgetsLocalizations;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tecbloc/binding.dart';
-import 'package:tecbloc/view/articel/manage_articel.dart';
-import 'package:tecbloc/view/articel/single.dart';
-import 'package:tecbloc/view/articel/single_manage_articel.dart';
-import 'package:tecbloc/view/main_screen/main_screen.dart';
-import 'package:tecbloc/view/podcast/single_podcast.dart';
-import 'package:tecbloc/view/splash_screen.dart';
+import 'package:tecbloc/route_manager/Pages.dart';
+import 'package:tecbloc/route_manager/names.dart';
 
 import 'constant/my_colors.dart';
 import 'my_http_overrides.dart';
@@ -42,33 +37,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return GetMaterialApp(
+      initialRoute: NamedRoute.initialRoute,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: lightTheme(textTheme),
-      getPages: [
-        GetPage(
-            name: MainRoute.routeMainScreen,
-            page: () => const MainScreen(),
-            binding: RegisterBinding()),
-        GetPage(
-            name: MainRoute.routeSingleArticle,
-            page: () => Single(),
-            binding: ArticleBinding()),
-        GetPage(
-            name: MainRoute.manageArticel,
-            page: () => ManageArticel(),
-            binding: ArticleManageBinding()),
-        GetPage(
-            name: MainRoute.singleManageArticel,
-            page: () => SingleManageArticel(),
-            binding: ArticleManageBinding()),
-        GetPage(
-          name: MainRoute.singlePodcastArticel,
-          page: () => SinglePodcast(),
-        ),
-      ],
-      home: const SplashScreen(),
-      // home: const SinglePodcast(),
+      getPages: Pages.pages,
       locale: const Locale('fa', ''),
       supportedLocales: const [
         Locale('fa', ''),
@@ -81,15 +54,6 @@ class MyApp extends StatelessWidget {
       ],
     );
   }
-}
-
-class MainRoute {
-  MainRoute._();
-  static String routeMainScreen = "/MainScreen";
-  static String routeSingleArticle = "/SingleArticle";
-  static String manageArticel = "/ManageArticel";
-  static String singleManageArticel = "/SingleManageArticel";
-  static String singlePodcastArticel = "/SinglePodcast";
 }
 
 ThemeData lightTheme(TextTheme textTheme) {

@@ -91,6 +91,10 @@ class SinglePodcastController extends GetxController {
     }
   }
 
+  timerCheck() {
+    if (player.playing) {}
+  }
+
   setLoopMode() {
     if (isLoopAll.value) {
       isLoopAll.value = false;
