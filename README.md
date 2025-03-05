@@ -50,10 +50,49 @@ cd tagblog
 flutter pub get
 flutter run
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=mrabbas2655&show_icons=true&theme=tokyonight)  
+---
 
-![Most Used Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=mrabbas2655&layout=compact&theme=tokyonight)  
+📊 GitHub Stats  
+
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=mrabbas2655&repo=flutter-instagram-test&show_icons=true&theme=tokyonight)  
+
+![Most Used Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=mrabbas2655&repo=flutter-instagram-test&layout=compact&theme=tokyonight)  
 
 ![GitHub Streak](https://streak-stats.demolab.com?user=mrabbas2655&theme=tokyonight)  
 
 ![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=mrabbas2655&theme=tokyonight)
+
+
+
+
+
+
+
+
+---
+
+📅 Release & Update History
+
+Initial Release: [۱۴۰۳/۱۲/۱۵ | 2025/01/05]
+
+Last Update: [۱۴۰۳/۱۲/۱۵ | 2025/03/05]
+
+
+
+
+
+---
+
+📜 License
+
+This project is released under the MIT License. Feel free to use it, but please give credit to the author.
+
+📞 Contact Me 09981384403
+
+📩 If you have any questions or suggestions, feel free to reach out via GitHub.
+
+
+---
+
+🔹 Let me know if you need any modifications!
+
