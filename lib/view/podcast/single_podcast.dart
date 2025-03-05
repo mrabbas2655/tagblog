@@ -12,12 +12,12 @@ import '../../constant/my_colors.dart';
 import '../../gen/assets.gen.dart';
 
 class SinglePodcast extends StatelessWidget {
-  late SinglePodcastController controller;
-  late PodcastsModels podcastsModels;
-  SinglePodcast() {
-    podcastsModels = Get.arguments;
-    controller = Get.put(SinglePodcastController(id: podcastsModels.id));
-  }
+  final SinglePodcastController controller;
+  final PodcastsModels podcastsModels;
+
+  SinglePodcast({super.key})
+      : podcastsModels = Get.arguments,
+        controller = Get.put(SinglePodcastController(id: Get.arguments.id));
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class SinglePodcast extends StatelessWidget {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.only(top: 22, right: 8),
+                            padding: const EdgeInsets.only(top: 22, right: 8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -148,7 +148,7 @@ class SinglePodcast extends StatelessWidget {
                                         size: 24, // اندازه منطقی‌تر
                                         color: SolidColors.seeMore,
                                       ),
-                                      SizedBox(width: 8),
+                                      const SizedBox(width: 8),
                                       SizedBox(
                                         width: Get.width / 1.5,
                                         child: Obx(
@@ -187,7 +187,7 @@ class SinglePodcast extends StatelessWidget {
               height: Get.height / 7,
               decoration: MyDecorations.mainGradient,
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -199,8 +199,8 @@ class SinglePodcast extends StatelessWidget {
                         baseBarColor: SolidColors.scaffoldBg,
                         progress: controller.progressValue.value,
                         buffered: controller.bufferedValue.value,
-                        total:
-                            controller.player.duration ?? Duration(seconds: 0),
+                        total: controller.player.duration ??
+                            const Duration(seconds: 0),
                         onSeek: (position) {
                           controller.player.seek(position);
                         },
@@ -215,7 +215,7 @@ class SinglePodcast extends StatelessWidget {
                             controller.currentFileIndex.value =
                                 controller.player.currentIndex!;
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.skip_next,
                             color: Colors.white,
                           ),
@@ -251,7 +251,7 @@ class SinglePodcast extends StatelessWidget {
                                 ),
                                 if (controller.loading
                                     .value) // فقط برای لحظه‌ای لودینگ نمایش داده شود
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 52,
                                     height: 52,
                                     child: CircularProgressIndicator(
@@ -267,12 +267,12 @@ class SinglePodcast extends StatelessWidget {
                             controller.currentFileIndex.value =
                                 controller.player.currentIndex!;
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.skip_previous,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(width: 18),
+                        const SizedBox(width: 18),
                         Obx(
                           () => GestureDetector(
                             onTap: () {
